@@ -7,3 +7,6 @@ __pycache__/
 tasks.xml
 usage.statistics.xml
 workspace.xml
+
+# Pelican output
+output/
