@@ -1,15 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+import platform
+
 
 AUTHOR = 'Dave Rogers'
 SITENAME = 'What_He_Said'
-SITEURL = 'https://whathesaid.ca'
+
+if platform.node().lower().startswith('yukondude'):
+    SITEURL = 'http://whathesaid.ca'
+else:
+    SITEURL = ''
 
 PATH = 'content'
 OUTPUT_PATH = 'output/'
+
+ARTICLE_PATHS = ['posts']
 PAGE_PATHS = ['pages']
-STATIC_PATHS = ['heap']
+STATIC_PATHS = [
+    'favicon.ico',
+    'heap',
+    'robots.txt',
+]
 
 TIMEZONE = 'America/Whitehorse'
 
@@ -24,7 +36,7 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
+# Blog roll
 LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Python.org', 'http://python.org/'),
          ('Jinja2', 'http://jinja.pocoo.org/'),
@@ -37,7 +49,7 @@ SOCIAL = (('You can add links in your config file', '#'),
 DEFAULT_PAGINATION = 12
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+# RELATIVE_URLS = True
 
 ARTICLE_URL = '{date:%Y}/{date:%m}/{date:%d}/{slug}/'
 ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
