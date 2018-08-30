@@ -1,16 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
-import platform
 
 
 AUTHOR = 'Dave Rogers'
 SITENAME = 'What_He_Said'
-
-if platform.node().lower().startswith('yukondude'):
-    SITEURL = 'http://whathesaid.ca'
-else:
-    SITEURL = ''
+SITEURL = ''
 
 PATH = 'content'
 OUTPUT_PATH = 'output/'
