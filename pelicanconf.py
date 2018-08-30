@@ -4,13 +4,18 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Dave Rogers'
 SITENAME = 'What_He_Said'
-SITEURL = ''
+SITEURL = 'https://whathesaid.ca'
 
 PATH = 'content'
+OUTPUT_PATH = 'output/'
+PAGE_PATHS = ['pages']
+STATIC_PATHS = ['heap']
 
 TIMEZONE = 'America/Whitehorse'
 
 DEFAULT_LANG = 'en'
+
+TYPOGRIFY = True
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -33,3 +38,10 @@ DEFAULT_PAGINATION = 12
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+
+ARTICLE_URL = '{date:%Y}/{date:%m}/{date:%d}/{slug}/'
+ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
+PAGE_URL = '{slug}/'
+PAGE_SAVE_AS = '{slug}/index.html'
+
+DELETE_OUTPUT_DIRECTORY = True
