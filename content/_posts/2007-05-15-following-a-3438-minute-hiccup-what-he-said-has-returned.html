@@ -1,0 +1,37 @@
+---
+layout: single
+status: publish
+published: true
+title: Following a 3,438 minute hiccup, What He Said has returned.
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 83
+wordpress_url: http://whathesaid.ca/2007/05/15/following-a-3438-minute-hiccup-what-he-said-has-returned/
+date: '2007-05-15 23:09:05 -0700'
+date_gmt: '2007-05-16 06:09:05 -0700'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 19
+  author: Geof Harries
+  author_email: no@spam.com
+  author_url: http://subvert.ca/
+  date: '2007-05-16 07:28:59 -0700'
+  date_gmt: '2007-05-16 14:28:59 -0700'
+  content: OS X has this killer app, <a href="http://locomotive.raaum.org/" rel="nofollow">Locomotive</a>,
+    that is a one-step operation. Drag the file into your Applications folder and
+    done. Now you're RoR'in.
+- id: 20
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2007-05-16 08:12:05 -0700'
+  date_gmt: '2007-05-16 15:12:05 -0700'
+  content: |-
+    I think just about every OS or Linux distribution has a better way to install RoR, but on Gentoo everything's from scratch. It's very simple on Windows, even without <a href="http://instantrails.rubyforge.org/wiki/wiki.pl?Instant_Rails" rel="nofollow">Instant Rails</a>, and only slightly more work on Ubuntu.
+
+    More memory helps too.
+---
+<p>I've been trying to install the <a href="http://www.ruby-lang.org/en/">Ruby programming language</a> on this server for some time, mostly so that I can doodle about with <a href="http://www.rubyonrails.org/">Ruby on Rails</a>. I had aborted two previous attempts after the first twenty-something hours and a host of out-of-memory errors from the occasional sloppily-written <a href="http://en.wikipedia.org/wiki/Daemon_%28computer_software%29" class="def">daemon</a>.</p>
+<p>This time though, I was going to go for the gusto and force 'er on through. Ruby itself compiled in a reasonable amount of time, but then it decided to install its documentation. For some reason, doing that required all of the memory, and then some, on my server. Poor <a href="http://www.gentoo.org/">Gentoo</a> started <a href="http://en.wikipedia.org/wiki/Thrash_%28computer_science%29">thrashing</a> madly, and I gradually killed services to lighten the load, eventually shutting down e-mail, database, and the webserver that's responsible for what you see here.</p>
+<p>Three thousand, four-hundred, and thirty-eight minutes later -- or just over 57 hours -- and it had finished. Only about an hour of that involved the CPU; the rest was devoted to <a href="http://en.wikipedia.org/wiki/Virtual_memory" class="def">virtual memory</a> page swaps as the Ruby process consumed well beyond this box's meagre 128MB of physical RAM.</p>

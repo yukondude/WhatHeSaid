@@ -1,0 +1,20 @@
+---
+layout: single
+status: publish
+published: true
+title: CRLFs in bash scripts
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 7
+wordpress_url: http://www.whathesaid.ca/2006/06/27/crlfs-in-bash-scripts/
+date: '2006-06-27 12:16:58 -0700'
+date_gmt: '2006-06-27 19:16:58 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>I occasionally run into this error when working with <a href="http://en.wikipedia.org/wiki/Bash">bash</a> shell scripts:</p>
+<p><code>: bad interpreter: No such file or directory</code></p>
+<p>Sometimes the line begins with munged-together directory paths.</p>
+<p>The problem is Windows-style CRLF <a href="http://en.wikipedia.org/wiki/Newline">line-terminators</a> rather than UNIX-friendly LF terminators. A quick run of <code>dos2unix</code> fixes it nicely.</p>
+<p>The CRLFs sneak in because I often write and test apps on Windows (<a href="http://www.cygwin.com/">Cygwin</a> to the rescue) and then deploy them to Linux.</p>

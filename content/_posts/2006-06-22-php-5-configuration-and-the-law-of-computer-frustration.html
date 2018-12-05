@@ -1,0 +1,26 @@
+---
+layout: single
+status: publish
+published: true
+title: PHP 5 configuration and the Law of Computer Frustration
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 6
+wordpress_url: http://www.whathesaid.ca/2006/07/24/php-5-configuration-and-the-law-of-computer-frustration/
+date: '2006-06-22 10:41:00 -0700'
+date_gmt: '2006-06-22 17:41:00 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>I've long subscribed to the following maxim, particularly in reference to high tech:</p>
+<blockquote><p>"The more frustrating the problem, the more simple the solution."</p></blockquote>
+<p>I doubt that it was my noodle that thunk this one up, but I've experienced its effect time after time.</p>
+<p>I've uttered the phrase on more than a few occasions in any of my semi-colon/curly-brace classes. Take my <a href="http://college.yukondude.com/comp220/">web applications with PHP and MySQL course</a> for example: omitted semicolons, missing curly braces, misspelled variable names, and -- my personal favourite -- blank spaces following a closing ?&gt; tag in an included PHP file, are the sort of things that can completely vapour-lock a beginning programmer. And the frustration of staring hopelessly at such a problem for a good half-hour doesn't improve after I show up with a merry whistle and point out the missing closing parenthesis in the <code>for</code> statement. (I then suggest "aaaaaargh" as the appropriate vocalization of that specific emotion.)</p>
+<p>I'm not immune from the law's effects, but my frustrations are more frequently due to configuration file settings.</p>
+<p>Just this morning I was installing the whole <a href="http://en.wikipedia.org/wiki/WAMP">WAMP</a> stack on my freshly nuked-and-paved PC. As the first test of PHP (version 5 this time), I whipped up the same file that everybody does, containing: <code> &lt;?phpinfo()?&gt;</code></p>
+<p>Expecting the pleasant purple PHP page in the browser, I got bupkes. View Source showed the un-interpreted PHP source code, so I immediately jumped to the very wrong conclusion that the PHP Apache module wasn't PHP-ifying properly. Twenty minutes of tests couldn't confirm that PHP wasn't working.</p>
+<p>As a penultimate recourse -- the very last recourse involving actual reading of manuals -- I turned to the <code>php.ini</code> configuration file. Somewhere near the top was this innocuous line:</p>
+<p><code>short_open_tag = Off</code></p>
+<p>Apparently PHP5 expects the full <code>&lt;?php</code> open tag as a default. (The language lawyer in me says "just as it should be", but the longtime PHP contractor in me replies "Oh, you <em>must</em> be joking.") A quick change to <code>On</code>, an Apache restart, and it was purple goodness as far as the eye can scroll.</p>
+<p>Two seconds to fix a thirty-minute problem: law upheld.</p>

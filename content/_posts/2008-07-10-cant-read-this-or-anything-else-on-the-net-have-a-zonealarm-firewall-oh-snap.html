@@ -1,0 +1,32 @@
+---
+layout: single
+status: publish
+published: true
+title: Can't read this? Or anything else on the 'net? Have a ZoneAlarm firewall? Oh
+  snap!
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 153
+wordpress_url: http://whathesaid.ca/?p=153
+date: '2008-07-10 09:42:20 -0700'
+date_gmt: '2008-07-10 17:42:20 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>Carole's Windows laptop suddenly refused to surf the web last night, right in the midst of her <a href="http://yukonchatterbug.wordpress.com/">prolific flurry of blog postings</a>. I started down my normal diagnostic checklist:</p>
+<ol>
+<li>Can you view my blog on the spare bedroom server? Yes, so the wireless is hunkey-dorey.</li>
+<li>Can you ping the <a href="http://en.wikipedia.org/wiki/Ip_address" class="def">IP</a> of the <span style="text-decoration: line-through">WHTV</span> NorthwesTel gateway downtown? Yes, so our cable connection is A-OK.</li>
+<li>Can you view the College's website? No, so something beyond downtown is bolloxed.</li>
+<li>Can you ping the IP of one of the College's servers? Yes, so <a href="http://en.wikipedia.org/wiki/Domain_Name_System" class="def">DNS</a> is also kaput.</li>
+</ol>
+<p>But my Ubuntu laptop had no trouble surfing the entirety of the webosphere. So how could DNS be the problem, since we both resolve domain names using the same service (WHTV's name servers, proxied by <a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a> in the spare bedroom)?</p>
+<p>Given that we're working with Windows here, rebooting seemed a sensible tactic, but to no avail. Other random technical incantations produced no better mojo. I finally hit on the idea of disabling the <a href="http://www.zonealarm.com/store/content/home.jsp">ZoneAlarm</a> firewall.</p>
+<p>Presto-changeo, Alakazaam, Walla Walla Washington: it works!</p>
+<p>Visiting ZoneAlarm's site revealed a largish confirmation of this particular gremlin:</p>
+<p style="text-align: center"><a href="http://download.zonealarm.com/bin/free/pressReleases/2008/LossOfInternetAccessIssue.html"><img class="aligncenter" src="/heap/zonealarm-alert.gif" alt="ZoneAlarm" width="234" height="266" /></a></p>
+<p>Apparently a recent Microsoft Windows update (KB951748) conflicts rather dramatically with ZoneAlarm, effectively shutting down all internet access (via something to do with DNS).</p>
+<p>ZoneAlarm's suggestion is to uninstall the update, which does work, but leaves a sour aftertaste. I may try the free <a href="http://www.personalfirewall.comodo.com/">Comodo Pro</a> firewall as a more permanent solution.</p>
+<p>Mac and Linux users, perhaps the only ones who can read this given ZoneAlarm's popularity, can continue to rest easy, although an <a href="http://www.securityfocus.com/news/11526?ref=rss">operating system-independent flaw in DNS</a> will mean patches for everyone.</p>
+<p>(I'm not of the generation that can convincingly declare "<a href="http://www.flickr.com/photos/vjornaxx/294168009/">oh snap</a>", but I sure do enjoy pretending.)</p>

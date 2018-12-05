@@ -1,0 +1,80 @@
+---
+layout: single
+status: publish
+published: true
+title: How to convert a website's content into simple text files.
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 86
+wordpress_url: http://whathesaid.ca/2008/02/11/how-to-convert-a-websites-content-into-simple-text-files/
+date: '2008-02-11 19:59:42 -0800'
+date_gmt: '2008-02-12 03:59:42 -0800'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 58
+  author: Conor
+  author_email: conor.schaefer@gmail.com
+  author_url: ''
+  date: '2012-03-02 14:18:27 -0800'
+  date_gmt: '2012-03-02 22:18:27 -0800'
+  content: Thank you! Nice regex work to grab the title; I'd just been using "lynx
+    -dump URL | less &gt;&gt; FILENAME". =)
+- id: 59
+  author: Shiela
+  author_email: shiela@peacockmedia.co.uk
+  author_url: http://peacockmedia.co.uk
+  date: '2014-11-26 05:46:26 -0800'
+  date_gmt: '2014-11-26 13:46:26 -0800'
+  content: Hi, thanks for the tutorial. I love the markdown format too, simple and
+    powerful. You mention Mac there at the end. I hope you won't mind me mentioning,
+    in case it's useful to anyone, that I've recently started a project (an offshoot
+    of my Integrity link checker) that can suck a website and archive it as markdown.
+    Experimental and free  http://peacockmedia.co.uk/htmltomd
+---
+<p>Every so often I find the need to convert masses of web pages into simple, editable text files. (Who among us doesn't?) Programmer that I am, I also want to do this with as little manual intervention as possible.</p>
+<p>For example, I recently wanted to gather together some of <a href="http://college.yukondude.com/">my Yukon College course notes</a> to give to other instructors. The notes were originally written in <a href="http://en.wikipedia.org/wiki/Html" class="def">HTML</a>, but some people might prefer plain, unadulterated text.</p>
+<p>Now, there's text, and then there's <em>text</em>. There are a <a href="http://en.wikipedia.org/wiki/Lightweight_markup_language">bewildering variety</a> of "lightweight" formats or conventions for specifying headings, emphasis, lists, hyperlinks, and so forth. My favourite  is a format called <a href="http://daringfireball.net/projects/markdown/">Markdown</a>.</p>
+<p>To make a heading in Markdown, just underline it with equal signs or hyphens. To make a bullet list, start each point with an asterisk. To italicize, surround the word with underscores. These are all the same sorts of formatting tricks you might key into a quick e-mail.</p>
+<p>(You can do the same in MS Word, if you can spare an hour or two to undo some of Word's more aggressive auto-corrections.)</p>
+<p>Of course, you don't actually <em>see</em> any of the bullets, italics, or hyperlinks. C'mon it's just text. Instead, you have the option to -- presto-chango -- translate Markdown into HTML. Beats typing <a href="http://www.freesoft.org/CIE/RFC/1866/17.htm">angle brackets</a> all the live long day.</p>
+<p>But today's exercise is in the other direction. Here are the steps I take to convert a website into Markdown.</p>
+<ol>
+<li>"Rip" the website: copy all of its HTML and image content to your computer. On Windows, I use <a href="http://www.httrack.com/">HTTrack</a>. On Linux, something like <code>wget --convert-links --html-extension --mirror --random-wait --wait 3 http://microsoft.com/</code> will do (consider an extra hard drive or two to rip that site).</li>
+<li>Run <a href="http://www.aaronsw.com/2002/html2text/">Aaron Swartz's <code>html2text.py</code> Python script</a> to convert each ripped HTML file into the equivalent Markdown.</li>
+<li>Rename each Markdown text file to something more meaningful than the name typically assigned by HTTrack or <code>wget</code>. The contents of the &lt;title&gt; element makes for a pretty fair filename.</li>
+</ol>
+<p>Unfortunately, steps 2 and 3 contain that tedious word "each." There might be a couple of hundred eaches for one of my course sites. Any time you find yourself doing the same thing over, and over, and over, chances are you can get the computer do it more quickly and with fewer errors. That's kinda what they're good at.</p>
+<p>So, I wrote some Linux shell script code to automate both steps. The full <a href="http://code.google.com/p/scripnix/source/browse/trunk/bin/convert-html-to-md"><code>convert-html-to-md</code></a> script is part of my in-progress, yet freely-downloadable, Public Domain <a href="http://scripnix.googlecode.com/">scripnix</a> project, and depends on some of the project's other utilities.</p>
+<p>If that's just too much to contemplate, the following is a quick 'n dirty approximation of the full script. It doesn't handle filename collisions, and suffers from an excess of hyphenation, but it gets the job done.</p>
+<pre>#!/bin/bash
+# Usage: convert-html-to-md &lt;path-to-html2text.py&gt; &lt;file&gt;[...]
+# Convert the specified HTML files into Markdown text-format equivalents
+# in the current working directory. The file extension will be .md.txt.
+# Requires the html2text.py Python script by Aaron Swartz to convert
+# from HTML to Markdown text [www.aaronsw.com/2002/html2text/].
+html2text="${1}"
+shift
+
+while [ -n "${1}" ] ; do
+    # Use the contents of the title element for the filename. In case
+    # the title element spans multiple lines, the entire file is first
+    # converted to a single line before the sed pattern is applied. Any
+    # "unsafe" characters are then replaced with hyphens to produce a
+    # valid filename.
+    title=$(cat "${1}" | 
+            tr -d 'nr' | 
+            sed -nre 's/^.*&lt;title&gt;(.*?)&lt;/title&gt;.*$/1n/ip' | 
+            tr "`~!@#$%^&amp;*()+={}|[]\:;"'&lt;&gt;?,/ t" '[-*]')
+
+    # If there's no title, then just use the original filename.
+    if [ -z "${title}" ] ; then
+        title=$(basename "${1}" .html)
+    fi
+
+    # Convert the HTML to Markdown.
+    cat "${1}" | python "${html2text}" &gt; "${title}.md.txt"
+    shift
+done</pre>
+<p>Your mileage may vary on Mac OS. Without <a href="http://www.cygwin.com/">Cygwin</a>, Windows users are better off sticking to their pointee-clickee routine.</p>

@@ -1,0 +1,19 @@
+---
+layout: single
+status: publish
+published: true
+title: Passport Canada's site developers make an all-too-common security mistake.
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 124
+wordpress_url: http://whathesaid.ca/2007/12/04/passport-canadas-site-developers-make-an-all-too-common-security-mistake/
+date: '2007-12-04 08:30:18 -0800'
+date_gmt: '2007-12-04 16:30:18 -0800'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>The word this chilly, chilly morning is that <a href="http://www.theglobeandmail.com/servlet/story/RTGAM.20071204.wpassport1204/BNPrint/National/home">Passport Canada's site exposes</a> applicants' names, driver's licence numbers, and -- the Holy Grail of the identity thief -- Social Insurance Numbers to anyone wily enough to fiddle slightly with the mysterious letters and numbers that appear in the browser's address bar.</p>
+<p>This type of security weakness is well known and falls under the general heading of "<a href="http://en.wikipedia.org/wiki/Code_injection" class="def">injection</a>": entering unexpected values into a web application's form fields or <a href="http://en.wikipedia.org/wiki/Query_string" class="def">query strings</a> in order to escalate privileges or reveal restricted information.</p>
+<p>While simple enough to prevent, the design chinks susceptible to such injection exploits are difficult to identify. But, since the site has a valid <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security" class="def">TLS</a> certificate, it looks secure enough to management (you may recognize TLS as the little padlock that appears in your browser -- it's necessary for security, but it ain't enough). Kinda the same as habitually leaving your keys in the ignition, but slapping a car alarm decal on the window. The appearance of security is not security.</p>
+<p>The fundamental problem, of course, is that applicants' sensitive information is network-accessible: tough to have an online application process without that. Trouble is, <a href="/2007/05/25/privacy-and-the-network/">once information reaches the Internet, it is never ever forgotten</a>.</p>

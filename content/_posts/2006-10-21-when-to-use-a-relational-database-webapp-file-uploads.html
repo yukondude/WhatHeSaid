@@ -1,0 +1,24 @@
+---
+layout: single
+status: publish
+published: true
+title: 'When to use a relational database: webapp file uploads'
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 28
+wordpress_url: http://whathesaid.ca/2006/10/21/when-to-use-a-relational-database-webapp-file-uploads/
+date: '2006-10-21 12:38:10 -0700'
+date_gmt: '2006-10-21 19:38:10 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p><em>This post is the fourth in a series of arguments for using relational databases instead of, say, flat files. As I mentioned <a href="http://whathesaid.ca/2006/07/29/when-to-use-a-relational-database-ternary-logic/">previously</a>, I'm trying to steer clear from the "normal" reasons one often hears (integrity, transactions, anomaly reduction, yadda, yadda).</em></p>
+<p>Dang near every web application features file uploads. And leaving aside how dang inconvenient it is to manage files through a browser interface -- Can't I just upload the whole folder? Only one file at a time you say? -- there's always the question of where to stash the dang files once their bits reach mother server. It's not a complex design issue, just an annoying one, dangnabbit!</p>
+<p>In my own work, I've followed the conventional wisdom: "uploaded files are files after all, so stick 'em with the other files, in the filesystem." All that is then needed is to record each file's path in the webapp's database.</p>
+<p>But there were always a few nagging doubts about this method. To begin, what should the uploaded file be named? If it keeps its original name, you can't store it in a directory with other uploads lest there exist another file in that directory with the same name. To work around that, you can create a new directory for each uploaded file to avoid conflicts, naming the directory after some <a href="http://en.wikipedia.org/wiki/Surrogate_key" class="def">surrogate key</a> value supplied by the database. But creating and deleting all of those directories is a bother; why not just rename the file using that surrogate key value and slip in an HTTP <a href="http://www.ietf.org/rfc/rfc2183.txt">Content-Disposition</a> header to replace the original filename whenever the file is downloaded? Oh, because then the server has this directory with files named 4506, 7912, and 9903, and without a SQL prompt handy, there's no easy way to figure out which ones are dirty-girl JPEGs.</p>
+<p>And then there's the whole security bugaboo. Encouraging people to upload random binary strings to your server is like a Bring Your Own Matches shindig at a liquid oxygen factory. Enabling write permissions for the webserver account on an upload directory is as dangerous as it sounds. Any exploitable weakness in any part of that webapp -- or any other webapp running on the server under that account -- and the jig is up. "I just writes 'em, I don't secures 'em," says the webapp developer, hands waving aloft.</p>
+<p>The alternative -- storing files as <a href="http://en.wikipedia.org/wiki/Binary_large_object" class="def">BLOB</a>s in the database -- is pooh-poohed: "inefficient" decry the filesystem boosters, "non-atomic" shout the <a href="http://en.wikipedia.org/wiki/First_normal_form" class="def">First Normal Form</a>-ers, and "can't 'check' for porn as easily" wail the OS administrators.</p>
+<p>I pooh-poohed along with the rest, and spent hours wrasslin the details of uploaded storage. <em>How many times did I reload the database schema from script but forget to clean out the upload directory?</em></p>
+<p>But now I'm ready to try cramming uploaded BLOBs into the database. <a href="http://www.sitepoint.com/blogs/2006/10/15/binaries-belong-in-the-database-too/">Binaries Belong in the Database Too</a> tipped the argument for me. While some of the comments do raise convincing objections to the author's thesis, many of them begin with a hidden "theory suggests..." premise.</p>
+<p>I can play that game: <em>recent</em> theory suggests its better to store uploaded files in databases than in the filesystem. Now all I need is a webapp project to prove my theory. Perhaps one of my <a href="http://college.yukondude.com/comp210/">Database Design</a> students will be so kind.</p>

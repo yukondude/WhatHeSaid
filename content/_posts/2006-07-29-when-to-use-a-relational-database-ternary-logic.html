@@ -1,0 +1,51 @@
+---
+layout: single
+status: publish
+published: true
+title: 'When to use a relational database: ternary logic'
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 26
+wordpress_url: http://whathesaid.ca/2006/07/29/when-to-use-a-relational-database-ternary-logic/
+date: '2006-07-29 13:05:29 -0700'
+date_gmt: '2006-07-29 20:05:29 -0700'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 4
+  author: John Marabeas
+  author_email: jmarabe1@san.rr.com
+  author_url: ''
+  date: '2008-03-24 19:49:10 -0700'
+  date_gmt: '2008-03-25 03:49:10 -0700'
+  content: With all you said, would it be okay to include a "notes" field (tinyblob
+    datatype, let's say) in, say, a members table even though not every member will
+    have a note associated with him/her?  That being the case, would I assign a "NULL"
+    value to the field so as waste a minimum amount of storage space if the field
+    is left blank for those members with no notes?  (Or should a separate table me
+    made (called "notes") such that it will only contain information if there are
+    notes associated with those members who have them)?
+- id: 5
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2008-03-27 17:56:56 -0700'
+  date_gmt: '2008-03-28 01:56:56 -0700'
+  content: |-
+    John,
+
+    I wouldn't worry about space, since a text/blob or varchar column will only take up a small amount of overhead if left empty and you may not get any of that back for a NULL anyway. The separate table idea is probably the most space-efficient, although it allows an item to have multiple notes if you're not careful about the PK (but maybe that's not a problem anyway).
+
+    As for allowing NULL values for your notes or comments, unless you can clearly define the difference between a NULL note and an empty note, and see that definition as useful, I'd go with NOT NULL. NULL has its place, but avoiding it should be your default option.
+---
+<p><em>This post is the third in a series of arguments for using relational databases instead of, say, flat files. As I mentioned <a href="/2006/07/23/when-to-use-a-relational-database-deleting-records/">previously</a>, I'm trying to steer clear from the "normal" reasons one often hears (integrity, transactions, anomaly reduction, yadda, yadda).</em></p>
+<p><a href="http://en.wikipedia.org/wiki/Edgar_F._Codd" class="def">Dr. Codd's</a> <a href="http://en.wikipedia.org/wiki/Relational_data_model" class="def">relational data model</a> introduced the special value null, thereby sanctioning three-valued or <a href="http://en.wikipedia.org/wiki/Ternary_logic" class="def">ternary logic</a>.</p>
+<p>In relational-speak, null is interpreted as either "the absence of any meaningful value" or simply "unknown". The distinction can be subtle at times. Apparently Codd considered four-valued logic to better delineate the meanings, but that way lies madness.</p>
+<p>The relational null is special. For example, a Boolean data value can be True, False, or null. A numeric zero is distinct from null, as are the infinities. Empty strings are not null either. With the exception of <a href="http://en.wikipedia.org/wiki/Sql" class="def">SQL</a>'s <code>is</code> identity operator, any expression containing null will evaluate to null. Null is not equal to null. Even more interesting, null is not <em>not</em> equal to null.</p>
+<p>Null is the void; a black hole of nothingness.</p>
+<p>The relational null doesn't exist in most <a href="http://en.wikipedia.org/wiki/Imperative_programming" class="def">imperative</a> languages. The keyword "null" does pop up from time to time, but not in the context of true ternary logic. For example, the C language uses both <code>NUL</code> and <code>NULL</code> (the end-of-string guard, and an invalid pointer address, respectively) but these are just aliases for zero. Other languages use similar terms: <code>Nothing</code>, <code>None</code>, <code>nil</code>.</p>
+<p>Because of this, implementing null in a flat file becomes a bit of a challenge. How do you distinguish zero, the empty string, an empty list, or even False from null? Without special care, you can't. It's usually a simple matter to discern a null in a numeric or Boolean field (leave 'em blank). Things get murky for other datatypes. Leaving a string value empty might mean either an empty string or null (preferably the former). Which will it be? The inevitable "solution" is to encode a special sentinel value -- like "<code>***THIS IS A NULL***</code>" or perhaps something less flamboyant -- but the developer is ever after left with the uneasy feeling that one of the infinite monkeys using the system will someday enter "<code>***THIS IS A NULL***</code>" into a form, wreaking system-wide havoc.</p>
+<p>Even if you can come up with an untypeable sentinel value, you now have to make sure that expressions involving your sentinel are evaluated according to the rules of ternary logic. If you concatenate "<code>Bill</code>" with "<code>***THIS IS A NULL***</code>", do you get "<code>Bill ***THIS IS A NULL***</code>", "<code>Bill</code>", or "<code>***THIS IS A NULL***</code>" as the result? Hint, null concatenated (or added, multiplied, compared, inverted, exclusive-ored, etc.) to anything is null.</p>
+<p>All of this begs the question: why use nulls at all? Well, if you can avoid them, more power to you. One of the goals when designing relational databases is to minimize the need for nulls.</p>
+<p>But sometimes you just can't avoid the damned things. Take the example of recording the gender of people (e.g. employees, customers). What could be more straightforward? Male or Female. Case closed. Except real life always injects exceptions into the perfect design. Leaving aside hermaphrodites or SNL's <a href="http://en.wikipedia.org/wiki/Pat_%28Saturday_Night_Live%29" class="def">Pat</a>, there will always be cases where the gender field can't be filled in: it's not known yet, government regulations forbid asking in this one instance, or it's simply irrelevant for the task at hand. Without a null possibility, records end up with random genders or default male or female. Either way the data is incorrect rather than merely incomplete.</p>
+<p>Long story short, nulls are an indispensable tool for dealing with the vagaries of <a href="http://en.wikipedia.org/wiki/Meatspace" class="def">meatspace</a> data. That they're incorporated into every relational datatype is recognition of this fuzzy state of affairs. Rolling your own just to avoid <a href="http://en.wikipedia.org/wiki/RDBMS" class="def">RDBMS</a> overhead is a false economy.</p>

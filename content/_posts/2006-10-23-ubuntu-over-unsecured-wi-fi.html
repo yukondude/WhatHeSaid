@@ -1,0 +1,38 @@
+---
+layout: single
+status: publish
+published: true
+title: Ubuntu over unsecured Wi-Fi
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 54
+wordpress_url: http://whathesaid.ca/2006/10/23/ubuntu-over-unsecured-wi-fi/
+date: '2006-10-23 10:04:43 -0700'
+date_gmt: '2006-10-23 17:04:43 -0700'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 6
+  author: PNP Transistor
+  author_email: Tara@yahoo.com
+  author_url: http:///www.pnptransistor.com
+  date: '2011-01-25 07:50:18 -0800'
+  date_gmt: '2011-01-25 15:50:18 -0800'
+  content: "-** I am really thankful to this topic because it really gives useful
+    information '';"
+---
+<p>We were dog-sitting out in the country a few weeks ago in a house featuring an unprotected wireless access point. Normally, I would have cautioned the owner about such lax security, but if you knew where this home stands in relation to other living beings, you'd agree that it's not really that much of a concern.</p>
+<p>My partner discovered the Wi-Fi signal shortly after booting up her Windows laptop, and was able to connect immediately. I then tried the same with this here Ubuntu leg-warmer. The network-manager icon could clearly see the "default" wireless network, but wouldn't connect, regardless of how much force I applied when clicking.</p>
+<p>Considering the <a href="http://whathesaid.ca/2006/08/16/ubuntu-with-wpa-wi-fi-running-on-a-dell-inspiron-5160-shoulda-been-easier-but-coulda-been-impossible/">trouble I had getting the damned thing to connect to a WPA-secured network</a>, I wouldn't have thought jacking in to a wide-open net would be that big of a deal. Through a combination of random twiddling with the Networking applet and an intensive course of reboots, I eventually connected. I wish I remembered exactly how that was accomplished, but I know it involved entering the "default" SSID somewhere.</p>
+<p>Along the way, I discovered that <a href="http://www.google.com/search?q=ubuntu%20unsecured%20wireless&amp;hl=en&amp;meta=">other Ubuntuists have encountered the same difficulties</a>.</p>
+<p>Returning home, I was annoyed, but not entirely unsurprised, to discover that my laptop would no longer connect my home Wi-Fi network. The network-manager icon refused to so much as make an appearance. Prodding the Googlesphere revealed no small mention of the <code>/etc/network/interfaces</code> file. The pertinent entries in my copy of the file read as follows:</p>
+<p><code>auto eth1<br />
+iface eth1 inet dhcp<br />
+wireless-essid intithins</code></p>
+<p>Although not explained anywhere that I could find, every posting concerning the issue commented the <code>wireless-essid</code> declaration out of relevance. I tried the same:</p>
+<p><code>auto eth1<br />
+iface eth1 inet dhcp<br />
+#wireless-essid intithins</code></p>
+<p>Whaddayaknow, success! I'm curious how that line -- the one that names my internal SSID -- got there. I wonder if it's a relic of my earlier Wi-Fi conniptions. Either way, with it now safely commented, I'm keen to see if I can now effortlessly connect to an open wireless network.</p>
+<p>Perhaps one of my non-technical neighbours will oblige.</p>

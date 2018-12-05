@@ -1,0 +1,22 @@
+---
+layout: single
+status: publish
+published: true
+title: The infernal apostrophe. Or, why programmers loathe the Irish.
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 29
+wordpress_url: http://whathesaid.ca/2006/09/10/the-infernal-apostrophe-or-why-programmers-loath-the-irish/
+date: '2006-09-10 12:33:25 -0700'
+date_gmt: '2006-09-10 19:33:25 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>Do you blog using <a href="http://wordpress.org/">Wordpress</a>? Have you tried adding a blogroll link that contains an apostrophe? Is it sometimes preceded by a visible backslash, and othertimes not? Say it like a pirate: "Aaaargh."</p>
+<p>In Wordpress's defense, apostrophes are the bane of programmers. The problem is that, in programming expressions, single quotes (as they're referred to in this context) are often used to delimit strings of text. Therefore, to include an apostrophe in such a string, you have to "escape" it, usually with a backslash prefix, but in some cases by typing it twice.</p>
+<p>That system works dandy for monolithic desktop programs. It breaks apart rather dramatically when a single "program" spans several language boundaries. In a typical <a href="http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29" class="def">LAMP</a> web application there may be two or three such boundaries, for example: <a href="http://en.wikipedia.org/wiki/Sql" class="def">SQL</a> to <a href="http://en.wikipedia.org/wiki/Php" class="def">PHP</a> to <a href="http://en.wikipedia.org/wiki/Javascript" class="def">JavaScript</a> (<a href="http://en.wikipedia.org/wiki/Html" class="def">HTML</a> too, but it's less sensitive to malapostrophication). Each language can accommodate the literal apostrophes it has been given, but when it comes time to pass them across the boundary, it must (re)escape them for the next language down the line. As the man in the middle, PHP has to handle the bulk of these translations, and so includes an appropriately-named feature called <a href="http://www.php.net/magic_quotes">Magic Quotes</a>.</p>
+<p>Now I've worked with PHP for some years, and I'm not afraid to admit that I'm never entirely certain what magic quotes will do in any given situation. That they are magical is undisputed.</p>
+<p>At one point, I grew so infuriated with apostrophes that I encoded them as HTML entities right from the git-go, and there are still systems out there with <code>'</code> (because <code>'</code> didn't work in IE at one point) littered through the database. Of course, that approach has many failings, not the least of which is calculating the length of strings. And if you want to hook a non-HTML client straight to the database to run reports, well, you can forget that idea, buster.</p>
+<p>There are <a href="http://thedailywtf.com/forums/thread/87226.aspx">overly simple solutions to the apostrophe quandary</a> just as there are overly complex solutions (i.e. magic). Aside from tedious care, there doesn't appear to be a middle-of-the-road approach. And <a href="http://www.hiveminds.co.uk/node/3104/">mishandling apostrophes is a security issue</a>, not just an aesthetic one.</p>
+<p>So wouldn't it just be easier to get rid of all of the O'Reillys, O'Malleys, and O'Rourkes? Nothing violent, of course, just a mass renaming. From what I understand of the Irish, they're very forgiving when asked to discard centuries of custom and tradition...</p>

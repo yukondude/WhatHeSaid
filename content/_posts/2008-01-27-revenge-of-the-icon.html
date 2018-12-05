@@ -1,0 +1,71 @@
+---
+layout: single
+status: publish
+published: true
+title: Revenge of the Icon
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 134
+wordpress_url: http://whathesaid.ca/2008/01/27/revenge-of-the-icon/
+date: '2008-01-27 15:20:48 -0800'
+date_gmt: '2008-01-27 23:20:48 -0800'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 83
+  author: Fawn
+  author_email: fawnfritzen@gmail.com
+  author_url: http://fawnahareo.com
+  date: '2008-01-27 16:34:27 -0800'
+  date_gmt: '2008-01-28 00:34:27 -0800'
+  content: LMAO!
+- id: 84
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2008-01-27 18:35:55 -0800'
+  date_gmt: '2008-01-28 02:35:55 -0800'
+  content: 'On a similar theme, take a look at what you can do with images if someone
+    borrows your wireless internet connection: the <a href="http://www.ex-parrot.com/~pete/upside-down-ternet.html"
+    rel="nofollow">Upside-Down-Ternet</a>.'
+- id: 85
+  author: Meandering Michael
+  author_email: michaelpealow@canada.com
+  author_url: http://michaelpealow.blogspot.com
+  date: '2008-01-27 21:42:57 -0800'
+  date_gmt: '2008-01-28 05:42:57 -0800'
+  content: I wonder how much the logs would get clogged if you changed it to read
+    "Free Sex".
+- id: 86
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2008-01-28 08:30:42 -0800'
+  date_gmt: '2008-01-28 16:30:42 -0800'
+  content: I'd bet that would at least send more traffic to Wikipedia, especially
+    their <a href="http://en.wikipedia.org/wiki/Free_sex" rel="nofollow">Free Sex</a>
+    article.
+- id: 87
+  author: Dar
+  author_email: yukondar@gmail.com
+  author_url: ''
+  date: '2008-01-28 22:29:27 -0800'
+  date_gmt: '2008-01-29 06:29:27 -0800'
+  content: I'm laughing and thinking of the many possibilities... :)
+---
+<p>A past version of my <a href="http://yukondude.com/">company website</a> featured a page of favourite links, one of which led to <a href="http://en.wikipedia.org/">Wikipedia</a>. I spruced up each link with a wee <a class="def" href="http://en.wikipedia.org/wiki/Favicon">favicon</a>: the little 16x16 <a class="def" href="http://en.wikipedia.org/wiki/Pixel">pixel</a> logo that appears in the browser's address bar. Wikipedia's logo is the letter W:</p>
+<p align="center"><img src="/heap/wikipedia-icon.png" alt="Wikipedia Favicon" /></p>
+<p>The links page was eventually retired, but I noticed that the Wikipedia icon file, <code>wikipedia_icon.png</code>, was still very popular. The webserver's log files showed that it was being requested dozens of times per day, often by web surfers in tea-sipping China. The logs also revealed that the referring page -- the one displaying the W -- belonged to a web-hosting-slash-search site named <a href="http://www.mixcat.com/">Mixcat Interactive</a>, apparently headquartered in orange-juicing Florida.</p>
+<p>Sure enough, the search results page on their site was using "my" icon file (it's actually the intellectual property of Wikipedia, but the file sat on my server) for any result linking to Wikipedia:</p>
+<p align="center"><img src="/heap/mixcat-wikipedia.png" alt="Mixcat Wikipedia Search Results" width="257" height="186" /></p>
+<p>That's my W! Two of 'em, even.</p>
+<p>So, since I wasn't even using the icon file on my site anymore, I reckoned I would simply replace it with my company logo  <img src="/heap/dude-icon.png" alt="yukon dude software" width="16" height="16" align="top" />, using the same <code>wikipedia_icon.png</code> file name. Mixcat Interactive would thereafter display an oblique advertisement for my services:</p>
+<p style="text-align: center"><img src="/heap/mixcat-dude.png" alt="Mixcat Dude Search Results" width="257" height="186" /></p>
+<p>I figured one of those orange-juicers would eventually spot my little sock puppet and make the appropriate Fixcat.</p>
+<p>Six months later, the sock puppet was more popular than ever. Over the past two days, I counted 431 requests for the cute little guy. At a couple of hundred bytes per request, that doesn't amount to much bandwidth, but it does clog the logs.</p>
+<p>Maybe an ever-so-subtle change to <code>wikipedia_icon.png</code> would get their attention:</p>
+<p align="center"><img src="/heap/mixcat-suck.png" alt="Mixcat Sucks Search Results" width="257" height="186" /></p>
+<p>Feel free to <a href="http://www.mixcat.com/search.php?q=wikipedia&amp;x=16&amp;y=11">verify whether or not Suxcat Interactive has finally managed to correct the problem</a>.</p>
+<p>The moral of the story is that, while it's very easy to use an image from another site to dress up your own web page -- and possibly desirable from a <a class="def" href="http://en.wikipedia.org/wiki/Fair_dealing#Fair_dealing_in_Canada">fair-dealing</a> copyright perspective -- the originating site retains control of the content of that image.</p>
+<p>I wonder how much porn I could cram into that 16x16 icon...</p>
+<h3>Update, April 14</h3>
+<p>Looks like Mixcat finally got the message and removed the icon reference. But another <a href="http://websearch.mydlstore.net/">dubious search site</a> has taken up the banner in the interim. Fortunately, it seems far less popular than Mixcat, leaving my logs relatively unclogged.</p>

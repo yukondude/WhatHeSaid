@@ -1,0 +1,37 @@
+---
+layout: single
+status: publish
+published: true
+title: Duplicloreproittosynchroordinopysimilefuseplication
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 69
+wordpress_url: http://whathesaid.ca/2007/02/10/duplicloreproittosynchroordinopysimilefuseplication/
+date: '2007-02-10 19:36:29 -0800'
+date_gmt: '2007-02-11 02:36:29 -0800'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>I do battle with four computers:</p>
+<ul>
+<li>home office Windows XP workstation,</li>
+<li>Ubuntu Linux laptop,</li>
+<li>College office Windows XP workstation, and</li>
+<li>any one of 60 College computer lab Windows XP workstations.</li>
+</ul>
+<p>On top of that pile, you can throw the home office's Gentoo Linux server, a few more College Solaris, Linux, and Windows servers, and various web storage services.</p>
+<p><em>So, where did I store that file?</em></p>
+<p>It's taken years, but I've evolved a system for keeping them all synchronized with just the files that I want synchronized. Home stuff should stay home; College stuff should travel back and forth; and work stuff should stay the hell away from where I sleep.</p>
+<p><strong>Home Office Files</strong><br />
+<a href="http://www.cis.upenn.edu/~bcpierce/unison/">Unison</a> is an <a href="http://en.wikipedia.org/wiki/Ocaml" class="def">OCaml</a> wonder. It runs on Linux and Windows and can replicate additions, changes, and deletions in any direction. Setting it up takes effort, but <em>it has never guessed wrong</em> in all the time I've run it. Make sure to install the <a href="http://cygwin.com/">Cygwin</a> version if you're using Windows.</p>
+<p><strong>College Course Files</strong><br />
+Unison must be installed at both ends, so that won't work in the College's computer lab. And the network connection between class and home can be flaky. Instead, I use a trusty old flash drive equipped with now-obsolete <a href="http://www.clickteam.com/webftp/files/10/5/SynchronX_English.exe">SynchronX</a>. The program doesn't handle deleted file replication, and it seems to have sporadic trouble with file modification dates and the transition to and from Daylight Savings Time, but it's simple and runs just fine from the flash drive.</p>
+<p><strong>College Work Files</strong><br />
+The main server I futz with these days is running some antique Solaris: it'll be gone by March. In the meantime, since it only understands <a href="http://en.wikipedia.org/wiki/Secure_copy" class="def">SCP</a>, I use <a href="http://winscp.net/eng/index.php">WinSCP</a> (works great with <a href="http://en.wikipedia.org/wiki/SSH_file_transfer_protocol" class="def">SFTP</a> too) to reconcile my workstation's files with those in yon server's home directory.</p>
+<p><strong>E-mail</strong><br />
+College e-mail stays put on the <a href="http://en.wikipedia.org/wiki/Microsoft_Exchange_Server">Exchange</a> server, letting me get to it through the Outlook web client. Home e-mail is ultimately sucked down by the <a href="http://www.mozilla.com/en-US/thunderbird/">Thunderbird</a> client on the PC, but can be read beforehand from my server from elsewhere via limited-access <a href="http://en.wikipedia.org/wiki/Post_Office_Protocol" class="def">POP</a> so long as "leave messages on server" is always checked.</p>
+<p><strong>Browser Bookmarks</strong><br />
+<a href="http://www.google.com/tools/firefox/browsersync/">Google Browser Sync</a> keeps my <a href="http://www.mozilla.com/en-US/firefox/">Firefox</a> bookmarks and cookies summertime fresh.</p>
+<p><strong>To Do List</strong><br />
+Good old transportable, pocketable, airplaneable, write-onable, crumpleable, black-markerable, shreddable, and flammable paper is my to do technology of choice.</p>

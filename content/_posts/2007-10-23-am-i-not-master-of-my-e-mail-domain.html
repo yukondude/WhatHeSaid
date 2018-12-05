@@ -1,0 +1,24 @@
+---
+layout: single
+status: publish
+published: true
+title: Am I not Master of My (E-mail) Domain?
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 94
+wordpress_url: http://whathesaid.ca/2007/10/23/am-i-not-master-of-my-e-mail-domain/
+date: '2007-10-23 01:05:55 -0700'
+date_gmt: '2007-10-23 08:05:55 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>For the past year or so, some jackass has hijacked my <a href="http://yukondude.com/">yukondude.com</a> domain to serve as the return address for uncountable <a href="http://en.wikipedia.org/wiki/E-mail_spam" class="def">spam</a> mailings. I've since grown inured to the inconvenience, but a <a href="http://yukonjen.com/?p=281">recent Yukon Jen posting</a> was like déjà vu all over again.</p>
+<p>It started abruptly. One morning my inbox was filled with hundreds of <a href="http://en.wikipedia.org/wiki/Bounce_message">bounce messages</a> from overseas e-mail servers -- predominantly German, for some reason. The messages tended to report that <code><em>somebody</em>@<em>somewhere</em>.de</code> was an illegal e-mail address, or the mailbox was full, or the message was rejected because, lo and behold, it was spam. The sender addresses of the bounced messages were all of the form <code>qqx<em>gobbledegook</em>@yukondude.com</code>.</p>
+<p>My first panicked reaction was that a computer in the house had been <a href="http://en.wikipedia.org/wiki/Zombie_computer" class="def">zombified</a> and was spewing spam at the behest of some Eastern European gangster. Anti-virus and anti-spamware scans didn't turn up anything, but it wasn't until I ran a <a href="http://en.wikipedia.org/wiki/Packet_sniffer" class="def">packet sniffer</a> on my home network over a weekend that my panic was assuaged: my computers weren't responsible.</p>
+<p>No, the spammer had merely chosen my domain on a whim as the source of untold thousands of low-cap stock, ersatz Rolex, or herbal ED remedy solicitations. The <a href="http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">Simple Mail Transfer Protocol</a>, which handles all e-mail on the Internet, is surprisingly susceptible to forgery. Replacing the sender's address with another domain is a mere matter of typing: I used to demonstrate that very exploit in <a href="http://college.yukondude.com/">my programming courses</a>.</p>
+<p>Of course, no prospective buyer -- idiot! -- of the spam-sold wares would be able to reply to the enticement, but the body of the message will usually direct the reader to a website anyway.</p>
+<p>Meanwhile, yukondude.com is very likely <a href="http://en.wikipedia.org/wiki/Blacklist" class="def">blacklisted</a> in parts of central Europe. My e-mail server does implement <a href="http://www.openspf.org/Introduction">a protocol that verifies whether a message was legitimately sent </a>from yukondude.com, but that's still a newish concept, and not all recipient servers bother to check.</p>
+<p>The torrent of bounces has diminished, but every so often a new wave of them crops up for a week at a time. Yet one more unanticipated consequence of wiring together the world's supply of jerks.</p>
+<h3>Update Oct. 29</h3>
+<p>The bounce messages are back with a vengeance: 412 today and counting. I should also mention that the Sender Policy Framework protocol that I mentioned is really enabled via the domain's DNS registration rather than on the e-mail server.</p>

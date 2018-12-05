@@ -1,0 +1,39 @@
+---
+layout: single
+status: publish
+published: true
+title: 'When to use a relational database: deleting records'
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 23
+wordpress_url: http://www.whathesaid.ca/2006/07/23/when-to-use-a-relational-database-deleting-records/
+date: '2006-07-23 11:35:57 -0700'
+date_gmt: '2006-07-23 18:35:57 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>My earlier post in this series, "<a href="/2006/07/18/when-not-to-use-a-relational-database/">When not to use a relational database</a>", offered two conditions summarizing the circumstances under which you do not need to integrate an RDBMS into a system:</p>
+<ul>
+<li>the typical access pattern emphasizes reading over writing, and</li>
+<li>there's no requirement for ad-hoc queries.</li>
+</ul>
+<p>I also suggested that the absence of either doesn't mean that there's no escape from a database. Maybe I'll change my mind later, but in the meantime: when do you need a database? Or, when would you most benefit from one despite the overhead baggage it carries?</p>
+<p>For now I'll leave aside the oft-referred "transaction support" and "referential integrity" arguments and stick to issues that arise through simple and common programming tasks and how a database contrasts under these scenarios with simple <a href="http://en.wikipedia.org/wiki/Flat_file_database#Flat_files">flat file</a> storage. Structured stored (e.g., <a href="http://en.wikipedia.org/wiki/Xml">XML</a>) tends to behave much the same as flat files, only in a more discombobulating fashion.</p>
+<p>First up to bat: deleting records.</p>
+<p>Take a sample comma-delimited flat file, with say a thousand records, containing employee name and address info (the first field is the employee ID number). For example:</p>
+<pre>ID,FIRST,LAST,CITY,REGION
+1,Al,Bravo,Kitimat,BC
+2,Cathy,Delta,Albany,NY
+3,Ed,Foxtrot,Teslin,YT
+4,Geoff,Hotel,St Louis du Ha Ha,QC
+...
+1000,Zeke,Zebra,Walla Walla,WA</pre>
+<p>Now suppose Cathy Delta quits the company and her record must be deleted. If the file is reasonably small (this one probably qualifies), you could read the entire file into a dynamic data structure of some sort, delete Cathy's record in memory, and then write the entire file back to disk. Now that's pie-easy.</p>
+<p>Of course, as the file grows in size, this technique quickly becomes wholly impractical. Consider just the amount of RAM needed. In a multi-user/process system, there's another problem as the file must be necessarily locked during the entire open-read-delete-write-close cycle, preventing any other access to the file, even nondestructive read operations.</p>
+<p>There are other ways to delete Cathy's record. Lower-level filesystem primitives allow in-place changes to selected portions of the file. Perhaps overwriting the record's 23 characters with spaces is a solution, provided any code that processes the file knows to ignore blank lines. Potentially even faster, mark the first character in the line with a special "deleted record guard" to mean that the record really doesn't exist anymore. In either case, as the number of deletions accumulate, the file doesn't shrink in size. If this company has a lot of turnover, the file will continue to grow and grow, gradually filling up with junk data.</p>
+<p><a href="http://en.wikipedia.org/wiki/Sparse_file">Sparse files</a> are one imperfect way to address this issue. A more simple approach is to change to a fixed-size record so that the space occupied by deleted records can be reclaimed. Adding a layer of indirection between record keys (e.g., the employee ID number) and the record data preserves the illusion of a truly "flat" file even as the data shuffles around.</p>
+<p>If the deletion can be isolated to a portion of the file, nondestructive reads of most other records can occur in parallel, but accounting for these sub-file locked portions becomes burdensome.</p>
+<p>Pause for a moment and consider where we now stand. To get to this point you'd essentially have to write a database management system (perhaps not relational though); a DBMS that has yet to be debugged or tuned, one that doesn't support transactional semantics, one that doesn't enforce data integrity, and one that doesn't expose a standard query language for <a href="http://en.wikipedia.org/wiki/CRUD_%28acronym%29">CRUD</a> operations. Good job!</p>
+<p>Or...</p>
+<p><code>DELETE FROM employee WHERE id = 2;</code></p>

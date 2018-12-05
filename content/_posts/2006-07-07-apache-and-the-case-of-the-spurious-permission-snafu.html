@@ -1,0 +1,27 @@
+---
+layout: single
+status: publish
+published: true
+title: Apache and the case of the spurious permission snafu
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 13
+wordpress_url: http://www.whathesaid.ca/2006/07/07/apache-and-the-case-of-the-spurious-permission-snafu/
+date: '2006-07-07 13:51:12 -0700'
+date_gmt: '2006-07-07 20:51:12 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>(I especially enjoy the term "snafu", all the more so because of <a href="http://en.wikipedia.org/wiki/SNAFU">Snafu and Tarfu</a> lakes -- "named with a WWII sensibility" -- on the <a href="http://www.atlin.net/hiway7_travalog.htm">highway south from Jake's Corner, Yukon, to Atlin, BC</a>.)</p>
+<p>Apache was running fine on my PC, serving up a PHP/MySQL app that I've been working on. I had set it up quickly to run from Apache's default <code>htdocs</code> directory, but it was high time to serve it from the subversion sandbox on another drive where My Documents maps (a couple of years ago I finally drank the Microsoft "My <em>X</em>" folder kool-aid). I added the proper <code>Alias</code> and <code>&lt;Directory&gt;</code> settings to <code>httpd.conf</code>, restarted, and expected to see the site.</p>
+<p>Nope.</p>
+<p>Instead, Firefox gave me its friendly error page and the Apache log mentioned a permissions problem with the new directory.</p>
+<p>I'm running Windows XP Home with the Apache service running under the LocalSystem account, so I couldn't see how permissions would even enter the discussion: there aren't really supposed to be any <a href="http://en.wikipedia.org/wiki/Access_control_list">ACL</a>s in XP Home. But I did remember checking something during the XP install that mentioned not sharing my files with other accounts, so I jumped to the conclusion that My Documents had some permission dealie-o that was causing the problem. Now, I know that there's NTFS on the disk down there somewhere, and so I should be able to fiddle with the ACLs given the proper utility.</p>
+<p>The little knowledge I've just described is very commonly known to be "dangerous".</p>
+<p>It didn't take long to find a page describing <a href="http://whoozoo.co.uk/winxpFilePerms.htm#4">three methods to twiddle with XP Home's NTFS permissions</a>. I tried all three and, predictably, botched my drive but good.</p>
+<p>So, time to reformat and copy the ~3.5GB of files back from my server. Maybe, I thought, that would even strip out any ACLs since the files were coming from a Samba share on Linux.</p>
+<p>Nope. Apache still complains of a permission error.</p>
+<p>I left it for the night and shut down, still frustrated and pretty much out of ideas.</p>
+<p>Upon booting the next day, damned if Apache didn't serve up that web app from its new directory perfectly. Could it just have been a reboot? Apache should only need a restart and I had been restarting it with abandon the previous day. Did my ACL fiddling need a <a href="http://en.wikipedia.org/wiki/Three-finger_salute_%28computing%29">three-finger-salute</a> somewhere along the way to lock in the changes? If so, that implies that ACLs really were the problem, instead of the red herring I believed them to be. Problems that magically fix themselves are Not Good.</p>
+<p><em>You have just read a very boring anecdote.</em></p>

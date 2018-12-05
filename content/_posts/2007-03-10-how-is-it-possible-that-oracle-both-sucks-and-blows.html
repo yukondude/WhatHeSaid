@@ -1,0 +1,45 @@
+---
+layout: single
+status: publish
+published: true
+title: How is it possible that Oracle both sucks and blows?
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 76
+wordpress_url: http://whathesaid.ca/2007/03/10/how-is-it-possible-that-oracle-both-sucks-and-blows/
+date: '2007-03-10 13:38:49 -0800'
+date_gmt: '2007-03-10 20:38:49 -0800'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 17
+  author: A Real DBA
+  author_email: offcenter77@yahoo.com
+  author_url: ''
+  date: '2007-06-08 11:03:30 -0700'
+  date_gmt: '2007-06-08 18:03:30 -0700'
+  content: |-
+    I'm sorry to say this, but if you had a hard time installing an Oracle client and the ODBC drivers from the latest version of Oracle, then you are indeed technically challenged.
+
+    I've been working with Oracle since version 7.3, and while I do agree that Oracle heaps on the Java, I have to say that the Oracle client and the ODBC drivers are a snap to install, and you can do it without loading up all 400mb of Java garbage.  I've done it on slow machines in less than 15 or 20 minutes.  On newer machines, it's even faster than that (as in less than 10).
+
+    Oracle is not all that complex, if you know what you are doing.  If you don't know the technology stack, then you will hit the wall.  It's as plain and simple as that.
+- id: 18
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2007-06-08 17:56:31 -0700'
+  date_gmt: '2007-06-09 00:56:31 -0700'
+  content: If I was setting up Parallel Server or replication, then your point is
+    well taken. But an ODBC driver? That it takes a "Real DBA" as long as 20 minutes
+    is not a flattering portrayal of Mr. Ellison's database.
+---
+<p>I spent Friday morning installing -- er, trying to install -- <a href="http://www.oracle.com/database/index.html">Oracle</a> database <a href="http://en.wikipedia.org/wiki/Open_Database_Connectivity" class="def">ODBC</a> drivers so that some College staff could connect to our shiny new server using <a href="http://office.microsoft.com/en-us/access/default.aspx">Microsoft Access</a>. It took until lunchtime to get two computers configured, including the time to write out a four-page instruction manual for the process.</p>
+<p>Installing drivers on staff computers is not the sort of thing I usually do, but we were in the midst of a considerable system upgrade, and that was one of the ways I could be helpful.</p>
+<p>Normally, installing an ODBC driver is a matter of running a small installation program -- assuming Windows doesn't already come bundled with the driver -- and entering some server specifics for something called a <a href="http://isp.webopedia.com/TERM/D/DSN.html" class="def">DSN</a>. Five minutes, tops.</p>
+<p>Not so for Oracle. The procedure I eventually scratched together required manually "deinstalling" (Oracle's terminology) every pre-existing scrap of Oracle gunk and then "undeinstalling" (my terminology) the full-blown administrator client, consisting of the aforementioned ODBC driver along with about <strong>400MB</strong> of ugly, ugly Java programs. Depending upon the age of the computer (a predictor of the amount of Oracle cruft that had accumulated), the entire process ate up between 15 and 45 minutes per.</p>
+<p>I'm sure there is an easier way. Oracle's site certainly seemed to suggest so, offering sundry downloadable utilities to non-Cubans, non-Iranians, and non-North Koreans, but even the Googlesphere was silent on how to actually employ these downloads to solve an earthly problem.</p>
+<p>As a one-time/short-time/part-time Oracle <a href="http://en.wikipedia.org/wiki/Database_administrator" class="def">DBA</a>, I'm not wholly unfamiliar with the nefarious machinations of Oracle configuration. I used to consider it a week well spent if I could log in to a newly-installed database through a network.</p>
+<p>But that was years ago, before <a href="http://www.mysql.com/why-mysql/marketshare/">competition from Microsoft and Open Source started wheedling away at Oracle's dominance</a> (warning: possible ass-yanked statistics). Why haven't the tools improved in the interim? Why are the <a href="http://www.oracle.com/technology/obe/2day_dba/network/images/netmgr8.gif">user interfaces so hideously grotesque</a>? Why does every aspect of Oracle configuration have to be so spirit-crushingly complex?</p>
+<p>My best guess is that the company doesn't want to cannibalize the third-party support industry that has grown up around it. So they produce the lamest-but-legally-functioning tools possible, leaving it to their partners to sell multi-kilobuck slightly-less-lame products.</p>
+<p>I should distribute that four-page installation manual from Friday to <a href="http://en.wikipedia.org/wiki/Chief_Information_Officer" class="def">CIO</a>s from around the country. Let the ones about to shell out fifty-grand-plus for an Oracle license set up an ODBC connection during lunch. I'd make 'em do it twice, but there may not be time.</p>

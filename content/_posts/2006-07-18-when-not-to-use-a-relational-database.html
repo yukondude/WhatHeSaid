@@ -1,0 +1,29 @@
+---
+layout: single
+status: publish
+published: true
+title: When not to use a relational database
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 9
+wordpress_url: http://www.whathesaid.ca/2006/07/17/when-not-to-use-a-relational-database/
+date: '2006-07-18 14:35:23 -0700'
+date_gmt: '2006-07-18 21:35:23 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p><em>First in a series.</em></p>
+<p>I regularly teach a <a href="http://college.yukondude.com/comp210/">relational database course</a>, and also design and administer databases. I've been dealing with them ever since I was plunked down before a Microsoft SQL Server system on my first day of post-university work in 1994.</p>
+<p>Up to -- and a ways beyond -- that point, I loathed the mere mention of databases or SQL. This due to the database course CS students were forced to take: it covered B-trees and disk latency more than actual SQL or relational design. Confronted as I was with an uppity database each morning, it wasn't long before I slid into the headspace of the SQL enthusiast, happily occupying myself with various tuning, refactoring, and enhancing tasks.</p>
+<p>During the intervening years, I've encountered many a programmer, top-notch through otherwise-notched, that won't even consider a relational database for a freshly designed system -- they're simply out of the running from the git go.</p>
+<p>A recent rash of anti-db articles seems to confirm this view. <a href="http://radar.oreilly.com/">O'Reilly Radar</a> published a series of <a href="http://www.oreillynet.com/databases/blog/2006/04/database_war_stories.html">war stories</a> in which a sampling of the largest sites on the 'net -- Second Life, Flickr, Craigslist, Amazon, and Google -- all eschew relational databases in favour of custom filesystems or straight-ahead flat files. If any database is mentioned, it's typically a heavily cached MySQL ISAM implementation sans <a href="http://en.wikipedia.org/wiki/ACID">ACID transactions</a> and <a href="http://en.wikipedia.org/wiki/Referential_integrity">referential integrity</a>. "Performance!" is the reason.</p>
+<p>Just yesterday, <a href="http://www.tbray.org/ongoing/When/200x/2006/07/17/No-Databases">Tim Bray announced that he's not using a relational database</a> -- at runtime leastways -- for his <a href="http://www.tbray.org/ongoing/">ongoing</a> blog, preferring a hierarchical and "battle-hardened" filesystem for the job instead.</p>
+<p>Fair enough, says I. Those are all cases when a relational database really isn't warranted. Traditional <a href="http://en.wikipedia.org/wiki/RDBMS">RDBMS</a>s bundle in a great deal of overhead, and -- despite marketing to the contrary -- don't work well in clustered share-nothing commodity-boxen server farms. Most importantly, the sites mentioned are read-lots/write-little systems. That's a filesystem's lunch right there.</p>
+<p>You don't need a relational database when two conditions are met:</p>
+<ul>
+<li>the typical access pattern emphasizes reading over writing, and</li>
+<li>there's no requirement for ad-hoc queries.</li>
+</ul>
+<p>You want to avoid a database in the former case because it doesn't offer any advantage for all of the overhead each access incurs. As for the latter, you simply don't need a database with its full-blown query language if there are no unexpected queries anticipated. If there are no suits asking questions like "how many 5%-discounted blue widgets did we sell in the maritime provinces grouped by salesperson?", and there never will be, then you, sir, can live free of DB.</p>
+<p>I don't believe that the absence of either condition mandates the use of a database. As in all things, complexity is the word. Stay tuned for future mentions of when you might, just might, want to use a relational database.</p>

@@ -1,0 +1,95 @@
+---
+layout: single
+status: publish
+published: true
+title: 'When not to use a relational database: generating HTML'
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 133
+wordpress_url: http://whathesaid.ca/2008/01/25/when-not-to-use-a-relational-database-generating-html/
+date: '2008-01-25 11:58:09 -0800'
+date_gmt: '2008-01-25 19:58:09 -0800'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 79
+  author: Geof Harries
+  author_email: gdharries@mac.com
+  author_url: http://subvert.ca
+  date: '2008-01-25 16:44:34 -0800'
+  date_gmt: '2008-01-26 00:44:34 -0800'
+  content: 'Amen to that brother. Do your very best at all times to respect the layers:
+    structure, content, presentation and behaviour (relevant terms when it comes to
+    web apps).'
+- id: 80
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2008-01-25 16:58:33 -0800'
+  date_gmt: '2008-01-26 00:58:33 -0800'
+  content: Yes, and each layer tends to have a language or languages best suited to
+    its implementation. Just as you wouldn't want to query a relational database using
+    JavaScript, you wouldn't want to build a website's behaviour using a crufty pseudo-imperative
+    dialect of SQL.
+- id: 81
+  author: AOF
+  author_email: jonathanmarsters@hotmail.com
+  author_url: http://affiliatesonfire.com
+  date: '2008-03-30 22:07:59 -0700'
+  date_gmt: '2008-03-31 06:07:59 -0700'
+  content: Was this stuff *generated* from some higher level tool or did somebody
+    really sit down and write this... erm.. ?code?
+- id: 82
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2008-03-31 06:28:22 -0700'
+  date_gmt: '2008-03-31 14:28:22 -0700'
+  content: I wondered if it was auto-generated too. But much of it leaves the distinct
+    impression of a human's touch, and judging by the comments, bug fixes are performed
+    on this code rather than at a higher level.
+---
+<p><em>Yet another post in a neglected series of riveting relational databauchery.</em></p>
+<p>This past week I've been doing some maintenance work on the <a href="http://www.sct.com/Education/products/p_b_index.html">execrable system</a> that runs the <a href="http://www.yukoncollege.yk.ca/">College</a> (bear with me, I'm working on a <a href="http://en.wikipedia.org/wiki/Googlebomb" class="def">Google bomb</a>). This system happens to have a web-based interface that allows staff and students to view final marks, paystubs, class schedules, and so forth.</p>
+<p>If you've ever dabbled in web applications, you may know of some of the popular development platforms: <a href="http://www.php.net/">PHP</a> (which powers <a href="http://www.facebook.com/">Facebook</a>, <a href="http://digg.com/">Digg</a>, What He Said, and the College's public site), <a href="http://www.asp.net/">ASP.NET</a> (<a href="http://www.myspace.com/">MySpace</a>, <a href="http://www.lego.com/">Lego</a>), <a href="http://java.sun.com/products/jsp/">JSP</a> (<a href="http://www.theglobeandmail.com/">Globe and Mail</a>), <a href="http://www.rubyonrails.org/">Ruby on Rails</a> (mostly apps from <a href="http://www.37signals.com/">the folks that created RoR in the first place</a>), and a zillion others.</p>
+<p>These technologies query relational databases in order to render the <a href="http://en.wikipedia.org/wiki/Html" class="def">HTML</a> web pages that you see when you visit the site. None of them are built in to the relational database itself, using the <a href="http://en.wikipedia.org/wiki/Sql" class="def">SQL</a> query language from within to spit out the web's angle-bracket-laden content.</p>
+<p>But that's exactly how the College's self-service site works.</p>
+<p>It appears to have been built atop relational-database-maker <a href="http://www.oracle.com/">Oracle</a>'s  <a href="http://www.oracle.com/technology/products/database/application_express/index.html">HTML DB</a> product, which features <a href="http://en.wikipedia.org/wiki/PLSQL" class="def">PL/SQL</a> as its programming language -- a <a href="http://www.computer-dictionary-online.org/?q=bondage-and-discipline%20language" class="def">bondage-and-discipline</a> language that requires you to first declare that you will later again declare your intention to define a value as being equal to 3.</p>
+<p>Unfortunately, declarative query languages like SQL don't easily jump through the hoops and loops required to emit web pages. For example, a single section of code to extract a list of students based on whether the user is an instructor, an advisor, or both, and whether the user wishes to view students that are instructed, advised, or both, looks something like this.</p>
+<pre>
+IF student is instructed and advised THEN
+    IF user is instructor and advisor THEN
+        <em>30-line SQL query to retrieve students that are both instructed
+        and advised by this advisor and instructor</em>
+    ELSIF user is advisor THEN
+        <em>Same 30-line query, with one change to look for instructed
+        students that are only advised.</em>
+    ELSE
+        <em>Once again, the same 30 lines, this time looking for instructed
+        students that are just instructed.</em>
+    END IF;
+ELSIF student is advised THEN
+    IF user is instructor and advisor THEN
+        <em>Yet another copy of the 30-line SQL query to retrieve students
+        advised by this instructor/advisor.</em>
+    ELSIF user is advisor THEN
+        <em>You guessed it.</em>
+    ELSE
+        <em>Hoo boy.</em>
+    END IF;
+ELSIF student is instructed THEN
+    IF user is instructor and advisor THEN
+        <em>This is getting tedious.</em>
+    ELSIF user is advisor THEN
+        <em>And annoying.</em>
+    ELSE
+        <em>Time for a break, what's new on <a href="http://reddit.com/">Reddit</a>?</em>
+    END IF;
+ELSE
+    <em>A secret none-of-the-above option that appears here requires
+    another 30 lines</em>.
+END IF;</pre>
+<p>Leaving aside that most of that doesn't even make sense -- I lost an hour to wondering how a student could only be advised and not instructed -- it's just plain hideous. Some 300 lines of code are involved, all but 30 or so seemingly redundant.</p>
+<p>This was not an isolated case. Determining whether a user is an instructor or an advisor uses the same pattern. The PL/SQL "logic" that determines whether a user's account and PIN are valid is a multi-screen riot.</p>
+<p>Conclusion: keep the code out of the database.</p>
+<h3>Update, Jan. 28</h3>
+<p>Of course, I managed to screw up the example code so that the <code>ELSE</code> clause of each decision would never execute. It's fixed now, just in case anybody out there was planning on implementing their own twisted instructor/advisor system.</p>

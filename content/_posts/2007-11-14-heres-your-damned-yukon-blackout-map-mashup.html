@@ -1,0 +1,83 @@
+---
+layout: single
+status: publish
+published: true
+title: Here's your damned Yukon Blackout Map Mashup.
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 111
+wordpress_url: http://whathesaid.ca/2007/11/14/heres-your-damned-yukon-blackout-map-mashup/
+date: '2007-11-14 11:01:41 -0800'
+date_gmt: '2007-11-14 19:01:41 -0800'
+categories:
+- north_of_60°
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 48
+  author: Dar
+  author_email: yukondar@gmail.com
+  author_url: ''
+  date: '2007-11-14 20:34:43 -0800'
+  date_gmt: '2007-11-15 04:34:43 -0800'
+  content: |-
+    Well, how cool! You forgot to add the power outtage on Burma Road this morning :)
+
+    I'd love to see the mashup become real too.
+- id: 49
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2007-11-15 06:58:33 -0800'
+  date_gmt: '2007-11-15 14:58:33 -0800'
+  content: There was a power spike here as I was finishing up writing the code. That's
+    pretty unnerving when everything you do is dependent upon electricity.
+- id: 50
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2007-11-15 15:48:39 -0800'
+  date_gmt: '2007-11-15 23:48:39 -0800'
+  content: Sigh. Today's 40-minute city-wide blackout has come and gone. Now to reset
+    the clocks...
+- id: 51
+  author: Geof Harries
+  author_email: no@spam.com
+  author_url: http://subvert.ca/
+  date: '2007-11-15 16:01:36 -0800'
+  date_gmt: '2007-11-16 00:01:36 -0800'
+  content: I was just putting the final touches on a proposal and the horrible sinking
+    power sound enveloped me like an ominous dark cloud. Awesome.
+- id: 52
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2007-11-15 16:10:46 -0800'
+  date_gmt: '2007-11-16 00:10:46 -0800'
+  content: There seemed to be quite a brownout before today's outage. My fridge was
+    making horrible sinusoidal moaning noises in the moments before the juice cut
+    out completely; sounded like an old cassette Walkman with a dying battery.
+- id: 53
+  author: Dar
+  author_email: yukondar@gmail.com
+  author_url: ''
+  date: '2007-11-15 17:59:26 -0800'
+  date_gmt: '2007-11-16 01:59:26 -0800'
+  content: Well, I won't say how many UPS's at work quit working at the same time
+    and what kind of havoc that caused today...sigh.  Trying to find replacement UPS
+    batteries in Whitehorse is...well, challenging.
+- id: 54
+  author: Dave
+  author_email: thedude@yukondude.com
+  date: '2007-11-16 06:50:58 -0800'
+  date_gmt: '2007-11-16 14:50:58 -0800'
+  content: 'I think there should be a superhero named Control-Ess. With a theme song:
+    "Heeeere he comes to ''save'' the day!"'
+---
+<p><em>This is yet another entry in the increasingly improbable Yukon Blackout Mashup &amp; Feed Saga.</em></p>
+<p>You didn't ask for it, but you get it anyway: the <a href="http://yukondude.com/projects/blackout-mashup/">[Sample] Yukon Blackout Map Mashup</a>. It's more sample than mashup, since I don't actually have any Yukon Energy/Electrical data to play with. Instead, I invented a brief sequence of power fluctuations that afflict the Copper Ridge subdivision (at least the older bits of it that show up in <a href="http://maps.google.ca/">Google Maps</a>).</p>
+<p><a href="http://yukondude.com/projects/blackout-mashup/"><img src="/heap/blackout-mashup-screenshot.png" alt="Blackout Mashup Screenshot" width="500" height="253" /></a></p>
+<p>Not knowing what real data from the utilities might look like, I was forced to imagine that they might track blackouts, brownouts, and electrical surges. I also have no idea where the substation distribution boundaries are, so I just up and invented three of them that coincide with the neighbourhood/street-naming conventions on the Ridge.</p>
+<p>In any case, the mashup is live and interactive, so click away on the "Step Forward" button to watch the scenario play itself out. You can also zoom and pan; same as the regular Google Maps.</p>
+<p>I didn't enable the option to view the map in satellite or hybrid mode though: for some reason the street view is wildly misaligned with those, although it does match up in the downtown. The regular non-mashed-up Google Maps doesn't have this problem (it is consistently misaligned throughout, but only by a small amount).</p>
+<h3>Technical Details</h3>
+<p>Those that know me understand that the only reason this whole Yukon Blackout brouhaha exists is because I wanted an interesting reason to play with the <a href="http://www.google.com/apis/maps/">Google Maps API</a>. This has certainly fit the bill.</p>
+<p>It took me a while to reacquaint myself with JavaScript, but the API examples helped me along. All of the mashup code is embedded in the page, so you can just View Source to see how it's strung together.</p>
+<p>To keep things simple, I decided against using a library like <a href="http://www.prototypejs.org/">Prototype</a> or <a href="http://jquery.com/">JQuery</a>, but I certainly would in future, for the iterator methods alone -- raw JavaScript is a browser-dependent pain in the patoot.</p>

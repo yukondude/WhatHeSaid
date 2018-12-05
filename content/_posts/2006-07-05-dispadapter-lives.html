@@ -1,0 +1,47 @@
+---
+layout: single
+status: publish
+published: true
+title: DispAdapter lives
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 18
+wordpress_url: http://www.whathesaid.ca/2006/07/05/dispadapter-lives/
+date: '2006-07-05 08:30:16 -0700'
+date_gmt: '2006-07-05 15:30:16 -0700'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 2
+  author: Andrew Trossman
+  author_email: trossytrossman@hotmail.com
+  author_url: http://curepmd.com
+  date: '2008-11-30 20:48:12 -0800'
+  date_gmt: '2008-12-01 03:48:12 -0800'
+  content: |-
+    Hey Yukon Dude!  That was so funny!  Man those were heady times!  Funny thing is, I don't buy any of that stuff anymore.  All that object oriented-ish, distributed componentry crap - just don't fly.  Webscale is where it's at  - getting apps to run well on the cheap.  Those old com architectures just don't cut it.
+
+    How you been?  What's keeping you busy these days?  I'm into cloud computing - totally dig it.
+
+    hope you're well
+    Tross
+- id: 3
+  author: Dave
+  author_email: yukondude@gmail.com
+  date: '2008-12-02 19:27:25 -0800'
+  date_gmt: '2008-12-03 02:27:25 -0800'
+  content: Ya, heavyweight RPC never really delivered. Ad-hoc REST-y protocols seem
+    to be the flavour of the day in yonder puffy clouds.
+---
+<p>I've been rebuilding my main PC after its biennial nuke &amp; pave -- a rather severe form of housekeeping. It's a painstaking ordeal but it does give me a chance to spelunk through old project files.</p>
+<p>Stumbling upon the DispAdapter project transported me back to the heady days of 1999. I was working for a Microsoft-partnered consultancy, SRG Software (later FMC Software Consulting; later still, simply FMC; and now apparently something called <a href="http://www.ssctech.com/">SS&amp;C</a>), down by the Toronto waterfront. A fellow named Andrew Trossman and I had put together a 3-day workshop called Combat COM to teach the finer points of the lovely, now obsolete, Microsoft technology called the <a href="http://en.wikipedia.org/wiki/Component_Object_Model">Component Object Model</a>. Andrew was the COM guru at SRG and led the workshop while I helped organize the content and handled the VB-related portions.</p>
+<p>At some point during the three or four workshops we held that year, Andrew came up with the idea of the DispAdapter (short for Dispatch Adapter) that would solve a pretty esoteric COM problem. I obliquely described the scenario in <a href="http://www.yukondude.com/html/tame_vb_with_idl.php"><em>Tame Visual Basic with IDL</em></a>:</p>
+<blockquote><p>"You will understand the negative implications of dual interfaces much more clearly at the precise moment that you attempt to return a reference to an object's non-default interface when calling from a late-bound client across apartment boundaries."</p></blockquote>
+<p>Yowza! I was in full-throated smartypants mode that day.</p>
+<p>Anyhoo, the DispAdapter was a solution to this so-called problem. Andrew mentioned the idea to another SRG-er, Vlad Volkov. At the time, there were so many Romanian and Russian folks named Vlad in the office (maybe 3 or 4), that we simply took to calling him "Vlad 17". Vlad 17 whipped up a working version of the DispAdapter. I later tidied it up some, <a href="http://en.wikipedia.org/wiki/Active_Template_Library">ATL</a>-ified it, and added by-value marshalling (in unison, to the tune of Beethoven's 5th, first movement: "no-bo-dy caaaaares").</p>
+<p>We posted the code to the long-defunct workshop site, combatcom.com, and somewhere along the line it was <a href="http://www.sellsbrothers.com/tools/multidisp/default.aspx">mentioned by Chris Sells</a>, a onetime luminary of the COM clique. And that was that.</p>
+<p>Seven years later and 5,500 kilometres to the northwest, I google "dispadapter" and am surprised and amused to find it still floating about on them thar internets. One site uses it to <a href="http://www.codeproject.com/com/objectbrowser.asp?df=100&amp;forumid=2010&amp;exp=0&amp;select=23263">debug COM components from VB</a>, and another to <a href="http://dev.luca.minudel.it/dynamiccast.htm">jockey the multiple interface two-step from ASP scripts</a>.</p>
+<p>The sites still link to the ain't-there combatcom.com, so I'll put a link to the original Visual C++ source files below. I can't be bothered with some open source licence; I consider these files to be in the public domain. While I'm not sure that I'm technically the owner of the copyright -- the headers mention both Vlad 17 and FMC Software Consulting -- I can't believe anyone involved gives a flying fig. Enjoy.</p>
+<p>Download the <a id="p19" href="http://www.whathesaid.ca/wp-content/uploads/2006/07/DispAdapter.zip">DispAdapter Source Files</a> (103KB ZIP).</p>
+<p>PS. One of these days I'll discuss the infamous AntiDispAdapter. (Shudder.)</p>

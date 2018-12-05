@@ -1,0 +1,23 @@
+---
+layout: single
+status: publish
+published: true
+title: Compiler Ancestry
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 34
+wordpress_url: http://whathesaid.ca/2006/07/31/compiler-ancestry/
+date: '2006-07-31 20:42:14 -0700'
+date_gmt: '2006-08-01 03:42:14 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>While compiling the compiler the other day on this very server, I had some time to think about compilation. The server's running <a href="http://www.gentoo.org/">Gentoo</a> Linux, a <a href="http://en.wikipedia.org/wiki/Bsd" class="def">BSD</a>-like distribution that exercises the compiler more than most; all software packages and updates are delivered as source code.</p>
+<p>For the uninitiated (you lucky rascals), a compiler is a computer program that translates human-writable commands (a.k.a. "<a href="http://en.wikipedia.org/wiki/Source_code" class="def">source code</a>") into computer-readable instructions (a.k.a. "<a href="http://en.wikipedia.org/wiki/Machine_language" class="def">machine language</a>"). Source code is written in a variety of programming languages, most of which look like over-punctuated algebra for dimwits. Machine language is nothing but strings of ones and zeros, intelligible only to the central circuitry of the computer and spectacled and suspender'd 70s-era code jockeys who fancy this skill impressive.</p>
+<p>As with any computer program, compilers themselves must be compiled into machine language before the computer can run their instructions. It's a little bit chicken 'n egg: you need a compiler to build a compiler.</p>
+<p>Of course, just as we have chickens, we have compilers, so this is somehow possible. The way that it's done is that an earlier version of a compiler is used to compile the source code for the most recent version (which has new features, performance enhancements, bug fixes, etc.). There's always a second step though: the newly-compiled version must then compile its own source code once again -- so that it incorporates all of its own improvements.</p>
+<p>And if that weren't enough, compilers can also jump across different computer architectures -- from a <a href="http://en.wikipedia.org/wiki/Sun_Sparc" class="def">Sun UltraSPARC</a> to an <a href="http://en.wikipedia.org/wiki/AMD_Opteron" class="def">AMD Opteron</a>, for example -- through a technique called "<a href="http://en.wikipedia.org/wiki/Cross-compiling" class="def">cross compilation</a>". In this case a compiler runs on one architecture and emits the machine language instructions for a different target platform. The compiled machine language is copied over to the target machine where it then can be used to recompile its source code all over again on the target architecture. In analogy-speak, our chicken lays a turkey egg.</p>
+<p>The upshot of all this is that each compiler is built from its ancestor, which is built from <em>its</em> ancestor, and so on. It almost seems possible to trace the chain all the way back to the Adam Compiler.</p>
+<p>For instance, I'm running <a href="http://en.wikipedia.org/wiki/GNU_Compiler_Collection" class="def">GCC</a>, a compiler for the <a href="http://en.wikipedia.org/wiki/C_programming_language" class="def">C programming language</a>, version 3.4.6-r1 on the server. There is <a href="http://gcc.gnu.org/releases.html">a history of GCC releases</a> that traces back to version 0.9 in 1987. Now that's where the GCC lineage ends, because the first versions were written by <a href="http://www.stallman.org/">Richard Stallman</a>, ostensibly from scratch since his <a href="http://www.gnu.org/">GNU Project</a> abides nothing but <a href="http://www.gnu.org/philosophy/free-sw.html">free</a> (as in speech) software, and there were no free C compilers at that time. Bootstrapping a new compiler out of thin air is a "non-trivial" task.</p>
+<p>What chain of versions leads back from my compiler to Stallman's initial release 19 years ago? Which people ran <a href="http://en.wikipedia.org/wiki/Make" class="def"><code>make</code></a> on which computers with which versions of GCC? It must've been a pretty tortuous path from the halls of <a href="http://web.mit.edu/">MIT</a> to this Yukon yokel.</p>

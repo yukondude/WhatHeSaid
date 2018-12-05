@@ -1,0 +1,114 @@
+---
+layout: single
+status: publish
+published: true
+title: How I Make Words
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 1316
+wordpress_url: http://whathesaid.ca/?p=1316
+date: '2010-10-22 12:57:09 -0700'
+date_gmt: '2010-10-22 19:57:09 -0700'
+categories:
+- writin'
+tags: []
+wordpress_comments:
+- id: 274
+  author: Fawn
+  author_email: fawnfritzen@gmail.com
+  author_url: http://fawnahareo.com
+  date: '2010-10-22 13:16:20 -0700'
+  date_gmt: '2010-10-22 20:16:20 -0700'
+  content: |-
+    Kewl.
+
+    How you manage to take what is really a pretty mundane topic (not to mention geeky - but I say that with admiration) and make it hilarious is beyond me.  I salute you and your power to bend the tools to your awesome will.
+
+    "It ain't real writin' unless there be a shaded rocky outcrop in the background."
+
+    Ahahahaha!
+- id: 275
+  author: Dave
+  author_email: yukondude@gmail.com
+  author_url: ''
+  date: '2010-10-22 17:14:08 -0700'
+  date_gmt: '2010-10-23 00:14:08 -0700'
+  content: Now really, Fawn, you're making me blush, and when that happens all of
+    the bloood rruns too mye cheekes and I gett a bbiit woooooooozzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+- id: 276
+  author: Tim
+  author_email: tim.topper@gmail.com
+  author_url: ''
+  date: '2010-11-08 15:03:23 -0800'
+  date_gmt: '2010-11-08 23:03:23 -0800'
+  content: |-
+    Excellent! Didn't know about focuswriter _or_ wkhtmltopdf. I'm glad you did. They're both installed now.
+
+    (Our anally-retentive writing requirements are eerily similar, though I still don't have the version control religion.)
+
+    Thanks.
+- id: 277
+  author: Dave
+  author_email: yukondude@gmail.com
+  author_url: ''
+  date: '2010-11-08 15:31:28 -0800'
+  date_gmt: '2010-11-08 23:31:28 -0800'
+  content: 'Tim, I should mention that if you want headers and footers, you''ll need
+    the statically-compiled version of wkhtmltopdf for some reason. Either way, it
+    works great: it essentially automates printing to PDF from a browser.'
+---
+<p>Between business reports, <a href="http://sites.google.com/site/yccpsc100/">class notes</a>, and the <a href="http://www.yukoncollege.yk.ca/courses/info/crwr245">creative writing course</a> I'm hacking my way through at the College, I reckon that I churn out a few thousand words a week.</p>
+<p>As someone who teaches the finer points of Microsoft Word, you'd think it would be my writing tool of choice. Trouble is, Word doesn't meet my very <del>specific</del> anally-retentive writing <del>requirements</del> commandments:</p>
+<ol>
+<li>Must run on Linux.</li>
+<li>Must produce version-controllable content.</li>
+<li>Must have basic word processing functionality.</li>
+<li>Must cheque speling.</li>
+<li>Must permit simple, consistent formatting.</li>
+<li>Must not fight me with every goddamn keypress.</li>
+</ol>
+<p>Commandment #6 definitely rules out Word and its %#$@*! auto-numbering. Linux-friendly <a href="http://www.openoffice.org/product/writer.html">OpenOffice Writer</a> stumbles on #2, and, sadly, a little on #6. Plain text editors don't do well with #3 through #5. So what's left?</p>
+<p>It has taken me years to answer that question. During that time I have tested an assortment of text-based markup languages without success: <a href="http://en.wikipedia.org/wiki/Html">HTML</a>, <a href="http://www.docbook.org/whatis">variations on XML</a>, and even <a href="http://www.latex-project.org/">L<sup>A</sup>T<sub>E</sub>X</a>.</p>
+<p>Trouble is, <code>&lt;chapter xml:id="Excerpt"&gt;&lt;title&gt;Excerpt&lt;/title&gt;&lt;para&gt;begin{document}ittextquoterights &lt;em&gt;hard&lt;/em&gt; to read marked-up text, even after youtextquoterightve just written it.end{document}&lt;/para&gt;</code></p>
+<p>Maybe not <em>that</em> hard to read, since you wouldn't combine all three markup syntaxes together.</p>
+<p>What the markup languages have going for them is superb support for commandment #2: I can keep a complete history of each change made to a document, and compare any two versions -- without Word's %#$@*! change tracking getting all up in my bidniz. I desperately need this for my class notes, so that I can keep many years of updates together and view, for example, the gradual disappearance of the Floppy Disc from my lectures. Good riddance.</p>
+<p>There are a few "light" markup languages, and my favourite has long been <a href="http://daringfireball.net/projects/markdown/">Markdown</a>. It uses the sort of text-based formatting you might type yourself in an e-mail: "underline" a title with dashes, use asterisks to whip up a list, or bracket a word with _underscores_ for emphasis. It even handles hyperlinks and images. Markdown also comes with a handy script to generate HTML code from the text. A couple of years ago I wrote about the opposite exercise: <a href="http://whathesaid.ca/2008/02/11/how-to-convert-a-websites-content-into-simple-text-files/">converting existing HTML into Markdown</a>.</p>
+<p>But Markdown proved a little <em>too</em> simple for many of my most common writing tasks. It doesn't support tables or cross-references, for example. I also hadn't found a good editor for writing Markdown that didn't violate at least one of the commandments (usually the dreaded #6). It also didn't have an easy way to generate <a href="http://en.wikipedia.org/wiki/Portable_Document_Format">PDF</a> output that could be customized with my own formatting.</p>
+<p>Then, out of the blue, I came across three tools a couple of months ago that addressed my long-standing predicament:</p>
+<ul>
+<li><a href="http://fletcherpenney.net/multimarkdown/">MultiMarkdown</a>, which adds tables, and xrefs, and whatnot without muddying the syntax;</li>
+<li><a href="http://gottcode.org/focuswriter/">FocusWriter</a>, a distraction-free word processor that doesn't try to format plain text, <a href="http://whathesaid.ca/2010/09/24/focus-on-writing-with-focuswriter/">as described last month</a>; and</li>
+<li><a href="http://code.google.com/p/wkhtmltopdf/">wkhtmltopdf</a>, a tool for converting HTML to PDF, preserving all <a href="http://en.wikipedia.org/wiki/Css">CSS</a> formatting along the way.</li>
+</ul>
+<p>All I needed was some way to glue all that together, so <a href="http://code.google.com/p/scripnix/source/browse/trunk/bin/publish-markdown">I wrote a little script to do just that, and a little bit more</a>. Most days, it works like a charm.</p>
+<p>For example, I can write some simple, yet enthralling, Markdown text:</p>
+<pre>A Fateful Trip
+==============
+
+It all started at a tropic port, aboard a tiny ship:
+
+* the **mate**, a mighty sailing man; and
+* the **skipper**, brave and sure.
+
+A Three Hour Tour
+-----------------
+
+Five passengers set sail that day:
+
+| The Millionaire | His Wife | The Movie Star | The Rest                               |
+| --------------- | -------- | -------------- | -------------------------------------- |
+| Thurston Howell | Lovey    | Ginger         | Mary Ann and, believe it or not, "Roy" |
+
+Were it not for the fearless crew's courage, the _Minnow_ would have most assuredly been lost.
+
+Fortunately, the ship was able to set aground on an uncharted desert island, with wardrobe and radio intact.</pre>
+<p>In FocusWriter, the text is -- thank the gods -- unaltered:</p>
+<div class="captioned-image"><img class="size-full wp-image-1334 " title="A synopsis for an enthralling book, film, or perhaps a highly-syndicated TV show." src="/heap/writing-raw.jpg" alt="" width="480" height="205"><p>It ain&#039;t real writin&#039; unless there be a shaded rocky outcrop in the background.</p></div>
+<p>Then I run my little script and, depending on the style I choose, it produces both HTML and PDF output in mere milliseconds, ready for public display.</p>
+<p>The default style is admittedly uninspired:</p>
+<p><img class="aligncenter size-full wp-image-1337" title="Okay. Good. Not great." src="/heap/writing-default-format.png" alt="" width="480" height="292" /></p>
+<p>But I can just as easily substitute the style I created for my class notes:</p>
+<p><img class="aligncenter size-full wp-image-1338" title="A three-year study of enforced isolated cohabitation amongst the stereotypes of the South Seas." src="/heap/writing-note-format.png" alt="" width="480" height="289" /></p>
+<p>Or, if I'm feeling Mickey Spillane-esqe, I can turn on the manuscript style and relive the glory days of clickety-clack-ding:</p>
+<p><img class="aligncenter size-full wp-image-1339" title="It's surprising how easy it is to recreate typewriter-like output with a computer." src="/heap/writing-manuscript-format.png" alt="" width="480" height="370" /></p>
+<p>If you've gotten this far without questioning my sanity, I salute you. Nevertheless, a stable writing system is important in my varied lines of work, and I couldn't be more pleased with the one I've concocted.</p>

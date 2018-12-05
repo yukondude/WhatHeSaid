@@ -1,0 +1,38 @@
+---
+layout: single
+status: publish
+published: true
+title: 'Pro Bono Web Mojo: SID Ottawa-Gatineau website'
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 224
+wordpress_url: http://whathesaid.ca/?p=224
+date: '2008-10-01 17:55:36 -0700'
+date_gmt: '2008-10-02 00:55:36 -0700'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 166
+  author: Brian Hampson
+  author_email: Brian.Hampson@gmail.com
+  author_url: http://dragonspeed.wordpress.com
+  date: '2008-10-06 13:07:27 -0700'
+  date_gmt: '2008-10-06 20:07:27 -0700'
+  content: |-
+    The new layout/colours rock over the old one.
+
+    Nice work.
+---
+<p>Every so often, I get the chance to do some good ol' website development. Bright, crisp, and attractive design is not exactly my forté though, so I generally get paid very little, or nothing at all. Within the latter category, you would find the redesigned website that I prepared for the <a href="http://sidottawa.ca/">Ottawa-Gatineau chapter of the Society for International Development</a>.</p>
+<p style="text-align: center"><a href="http://sidottawa.ca/"><img class="aligncenter" title="SID Ottawa-Gatineau's newly-redesigned website." src="/heap/sidottawa-newsite.jpg" alt="" width="500" height="250" /></a></p>
+<p>For the past couple of years, I had been volunteering a little time every few weeks to update SID-OG's website with events and announcements. Trouble was, the entire site was a <a href="http://www.adobe.com/products/dreamweaver/">Dreamweaver</a> dinosaur: multiple out-of-sync design templates for the English and French portions, and more redundant and contradictory &lt;font&gt; tags than you could count.</p>
+<p>Upkeep was a tedious process. Adding a new event required: creating its page, adding a link to the new page in the upcoming events list on the home page, and adding another link to the upcoming events page itself. Then you had to do the same for the French site. Once the event had passed, there was even more work to remove it from the upcoming lists, add it to the past event lists, and insert links to event summaries and documents. Oh, and then the same again in French.</p>
+<p>Enough!</p>
+<p>This past month I spent a week or so rebuilding the entire website from the ground up. Simple layout, <a class="def" href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> styling, and a good dose of <a class="def" href="http://en.wikipedia.org/wiki/Php">PHP</a> programming to simplify -- if not outright automate -- the content management.</p>
+<p>As the site ran on from a donated -- yet <em>painfully</em> slow -- Windows Server account, without access to a database or webserver-modifiable directories, my content-management options were limited, so I settled on a file-based system. Adding a new event or announcement is merely a matter of FTP-ing a directory of event files to the server. Provided the directory contains the event or announcement's date, the code takes over and shows it in the appropriate upcoming or past lists, and even takes care of most of the French tasks (other than translation).</p>
+<p>Truth be told, most of the site's code is devoted to handling the English-French switch. From any English page you can click the Français link to view the same page in French, and vice versa. The French page names are properly translated too, so the observant visitor will see <code>/fr/accueil.php</code> in the address bar instead of some bastardized <a class="def" href="http://en.wikipedia.org/wiki/Franglais">franglais</a> version: <code>/fr/home.php</code>.</p>
+<p>Why the extra attention? French wife.</p>
+<p>If you were curious about the colour scheme, the new site borrows heavily from the old one:</p>
+<p style="text-align: center"><img class="aligncenter" title="SID Ottawa-Gatineau's old website." src="/heap/sidottawa-oldsite.jpg" alt="" width="500" height="288" /></p>
+<p>I find that my design's not as cheery, so I'll continue tweaking the colours, but the new maintenance features sure do contribute to my good cheer.</p>

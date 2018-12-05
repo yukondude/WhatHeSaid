@@ -1,0 +1,36 @@
+---
+layout: single
+status: publish
+published: true
+title: Ubuntu with WPA Wi-Fi running on a Dell Inspiron 5160. Shoulda been easier,
+  but coulda been impossible.
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 50
+wordpress_url: http://whathesaid.ca/2006/08/16/ubuntu-with-wpa-wi-fi-running-on-a-dell-inspiron-5160-shoulda-been-easier-but-coulda-been-impossible/
+date: '2006-08-16 15:44:03 -0700'
+date_gmt: '2006-08-16 22:44:03 -0700'
+categories:
+- propeller_beanie
+tags: []
+---
+<p>Now that Mac-inistas <a href="http://diveintomark.org/archives/2006/06/26/essentials-2006">Mark Pilgrim</a>, <a href="http://www.boingboing.net/2006/06/29/mark_pilgrims_list_o.html">Cory Doctorow</a>, and <a href="http://www.tbray.org/ongoing/When/200x/2006/06/15/Switch-From-Mac">Tim Bray</a> have made the leap to <a href="http://www.ubuntu.com/">Ubuntu</a> Linux, I thought it was high time to follow. Never able to afford a Macintosh, I ubuntu-ed from the Microsoft Windows pool of unsatisfied, inconvenienced, and generally trod upon users.</p>
+<p>My target machine for the Grand Experiment was a Dell Inspiron 5160 laptop. I had heard tell that the embedded Wi-Fi interfaces in Dell machines were...problematic. "Oh, everything can be fixed on a computer," I told myself as I charged through the OS installation. Following the first native reboot, I discovered that, while the wireless interface was visible in the networking tool, it couldn't be activated and didn't have any security options other than <a href="http://en.wikipedia.org/wiki/Wired_Equivalent_Privacy" class="def">WEP</a>.</p>
+<p>Now I was in a bit of a quandry. I wasn't about to lobotomize my wireless network's protection by replacing reliable ol' <a href="http://en.wikipedia.org/wiki/Wi-Fi_Protected_Access" class="def">WPA</a> with <a href="http://en.wikipedia.org/wiki/Cone_of_silence" class="def">cone of silence</a>-era WEP. But I had already affixed two Ubuntu decals to my laptop; an XP-ward retreat would be a humiliation for all to see.</p>
+<p>Quite a pickle.</p>
+<p>So I did what I usually do in such circumstances: mindlessly enter random command sequences copy-n-pasted from the Googlesphere. It wasn't long before the OS refused to recognize any network interface, much less the internal wireless card.</p>
+<p>The next morning, I re-installed Ubuntu from scratch, googled responsibly, and found a solution. The crucial article is <a href="http://www.seungpyo.com/stacksandpiles/2006/07/02/broadcom-wireless-in-ubuntu-dapper-606">Broadcom Wireless in Ubuntu Dapper 6.06</a>. The article mentioned a TrueMobile card, which shares the same BCM4309 chipset as mine. Running <code>lspci | grep 802.11</code> on my laptop verified this:</p>
+<pre>0000:02:02.0 Network controller: Broadcom Corporation BCM4309 802.11a/b/g (rev 03)</pre>
+<p>The instructions specified a driver file called <code>bcmwl5.inf</code> that you can get "from Dell or whoever." I searched for that one for some time, before it occurred to me that my partner's laptop (still running Windows) probably had a similar card and driver. Sure enough, it was hiding in her <code>C:DRIVERSNETWORKADDON</code> folder (I assume that's some Dell OEM folder). Since then, I've discovered the <a href="http://ndiswrapper.sourceforge.net/mediawiki/index.php/List">ndiswrapper driver page on Sourceforge</a> which points to the correct file for revision 3 of the BCM4309 chipset: <a href="http://ftp.us.dell.com/network/R76521na.EXE">ftp.us.dell.com/network/R76521na.EXE</a> (use <code>bcmwl5a.inf</code> from the <code>AR</code> directory).</p>
+<p>Once that file was safely stashed on my laptop, I ran through a simplified sequence of commands (I didn't need to first remove <a href="http://en.wikipedia.org/wiki/Ndiswrapper" class="def">ndiswrapper</a> and all my <code>RadioState</code>s were already zero):</p>
+<pre>sudo gedit /etc/modprobe.d/blacklist <em>[add line: blacklist bcm43xx]
+</em>sudo rmmod bcm43xx
+sudo apt-get install ndiswrapper-utils
+sudo ndiswrapper -i bcmwl5a.inf
+sudo ndiswrapper -m
+sudo modprobe ndiswrapper</pre>
+<p>A quick reboot and I could see the neighbour's wireless network (recently secured -- somebody wised up). My network didn't show up, but it didn't broadcast the <a href="http://en.wikipedia.org/wiki/SSID" class="def">SSID</a> so I didn't expect to see it anyway. Running <code>ifconfig</code> showed the wireless card was using the <code>wlan0</code> interface.</p>
+<p>Configuring WPA was a lead-pipe cinch. The Ubuntu documentation entry for <a href="https://help.ubuntu.com/community/WifiDocs/WPAHowTo">WifiDocs/WPAHowTo</a> shows all there is to it:</p>
+<pre>sudo apt-get install network-manager-gnome</pre>
+<p>Another reboot -- not needed perhaps, but it's now an ingrained Windows habit -- and I was able to right-click on the new icon and set up the WPA connection. Voila.</p>
+<p>Later I discovered that I had to repeat the WPA setup each time until I configured the AP to broadcast the SSID. Hiding the SSID doesn't greatly enhance security, so I can live with that change. The wireless interface also changed back to <code>eth1</code> for some reason.</p>

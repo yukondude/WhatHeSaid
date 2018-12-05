@@ -1,0 +1,49 @@
+---
+layout: single
+status: publish
+published: true
+title: Reminders for setting up an alternate python-versioned Django site on a non-root
+  URL under WSGI on Apache
+author: Dave Rogers
+author_email: wordpress@yukondude.com
+wordpress_id: 1757
+wordpress_url: http://whathesaid.ca/?p=1757
+date: '2012-01-03 09:46:40 -0800'
+date_gmt: '2012-01-03 17:46:40 -0800'
+categories:
+- propeller_beanie
+tags: []
+wordpress_comments:
+- id: 363
+  author: Graham Dumpleton
+  author_email: Graham.Dumpleton@gmail.com
+  author_url: http://blog.dscpl.com.au
+  date: '2012-01-03 12:18:22 -0800'
+  date_gmt: '2012-01-03 20:18:22 -0800'
+  content: |-
+    For reference, the source code reloading behaviour is described in:
+
+    http://code.google.com/p/modwsgi/wiki/ReloadingSourceCode
+- id: 364
+  author: Dave
+  author_email: yukondude@gmail.com
+  author_url: ''
+  date: '2012-01-03 21:00:36 -0800'
+  date_gmt: '2012-01-04 05:00:36 -0800'
+  content: Thanks, Graham. I referred to your own WSGI articles a number of times
+    and they helped me out of a couple of jams. Much appreciated.
+---
+<p>Lord help me, but that's the title I'm going with. In case it's not already obvious, you will not desire to read the following. Its existence is merely to document the tricky issues that some other sap (future-me, most likely) will encounter under a very precise set of circumstances, as enumerated in the title.</p>
+<p><img class="alignright" title="What exactly would you expect to appear when you perform a Google Image search for &quot;WSGI&quot;? Strangely, nothing pornographic." src="http://dev.pocoo.org/~mitsuhiko/wsgi-snake.png" alt="" width="202" height="101" />The first, and most frustipating, problem was getting <a href="http://code.google.com/p/modwsgi/">mod_wsgi</a> to use the proper Python libraries. Because I had to leave the stock Python 2.4 in place but needed 2.6 to run Django, it only dawned on me after many hours to re-<a href="http://code.google.com/p/modwsgi/wiki/InstallationIssues">configure and compile mod_wsgi with an explicit reference to the Python 2.6 version</a>. Extra care is also needed to make sure that the other Python modules are built with the correct version and end up in the proper <code>site-packages/</code> directory.</p>
+<p>Don't forget to point to the proper Python version in the <code>manage.py</code> file's <a href="http://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>.</p>
+<p>The mod_wsgi documentation is a snap to read, but only once you understand it thoroughly. I eventually stumbled upon <del><a href="http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIPythonPath">WSGIPythonPath</a></del> (Edit: I meant the <code>python-path</code> argument to <a href="http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIDaemonProcess">WSGIDaemonProcess</a>, since WSGIPythonPath doesn't work in daemon mode), which did make module inclusion so much more pleasant. The more you can do with Apache directives, the more simple becomes your <code>.wsgi</code> file. In the end, mine was just:</p>
+<pre>import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+os.environ['PYTHON_EGG_CACHE'] = '/tmp'
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()</pre>
+<p>Put the <code>.wsgi</code> file somewhere removed from your Django app directory. Somewhere that's easily accessible to the httpd daemon, like <a href="http://httpd.apache.org/docs/2.0/mod/core.html#documentroot">DocumentRoot</a>.</p>
+<p>Running elsewhere than a web root is always dicey in Django. An extra complication is that <a href="http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIScriptAlias">WSGIScriptAlias</a> gives you app it's own root URL, but that nothing in Django knows this, so you have to adjust all links with a -- preferably not hardcoded -- root path that matches the WSGIScriptAlias's setting. Same goes for <code>STATIC_URL</code> and <code>ADMIN_MEDIA_PREFIX</code> in <code>settings.py</code>, along with matching Apache <a href="http://httpd.apache.org/docs/2.0/mod/mod_alias.html#alias">Alias</a> directives and <a href="http://httpd.apache.org/docs/2.0/mod/core.html#directory">Directory</a> permissions.</p>
+<p>Oh, and <a href="https://docs.djangoproject.com/en/dev/topics/http/views/#the-500-server-error-view">if you don't include HTTP 404 and 500 error templates, Django won't run in non-DEBUG mode</a>. I kept seeing the error that it couldn't load a 500 template and thinking that meant it was trying to show me an actual HTTP 500 error (of which I had seen plenty thus far) and couldn't find the template to do so.</p>
+<p>Finally, if you're not running mod_wsgi in <a href="http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIDaemonProcess">daemon mode</a>, you'll need to restart Apache after every source code change. I must've fixed the same problem five times in five different ways before I realized that all of my fixes had worked, but I was still viewing the old code running. Ay Caramba.</p>
+<p>So that right there is how I spent about ten hours on New Year's Day.</p>
