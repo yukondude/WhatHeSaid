@@ -1,5 +1,5 @@
 ---
-title: '&#34;Does 3 Doors Down do comedy?&#34; '
+title: '"Does 3 Doors Down do comedy?" '
 author: 'Dave Rogers'
 date: '2017-01-30 07:20:51-08:00'
 tweet_id: 826087789892505601
